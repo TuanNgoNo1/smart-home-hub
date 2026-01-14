@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { TimePicker } from "@/components/ui/time-picker";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { SensorDataFilters, SensorType } from "@/types/sensor";
@@ -167,7 +168,7 @@ export const SensorFilterBar = ({
                 <CalendarComponent mode="single" selected={fromDate} onSelect={handleFromDateChange} initialFocus className="p-3 pointer-events-auto" />
               </PopoverContent>
             </Popover>
-            <Input type="time" step="1" value={fromTime} onChange={e => handleFromTimeChange(e.target.value)} className="w-full sm:w-[110px] flex-shrink-0" />
+            <TimePicker value={fromTime} onChange={handleFromTimeChange} />
           </div>
         </div>
 
@@ -185,7 +186,7 @@ export const SensorFilterBar = ({
                 <CalendarComponent mode="single" selected={toDate} onSelect={handleToDateChange} initialFocus className="p-3 pointer-events-auto" />
               </PopoverContent>
             </Popover>
-            <Input type="time" step="1" value={toTime} onChange={e => handleToTimeChange(e.target.value)} className="w-full sm:w-[110px] flex-shrink-0" />
+            <TimePicker value={toTime} onChange={handleToTimeChange} />
           </div>
         </div>
       </div>
