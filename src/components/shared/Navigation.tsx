@@ -1,4 +1,4 @@
-import { Home, Wifi, WifiOff, Settings, Database, History } from "lucide-react";
+import { Home, Wifi, WifiOff, Settings, Database, History, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +10,7 @@ const navItems = [
   { path: "/", label: "Dashboard", icon: Home },
   { path: "/data-sensor", label: "Data Sensor", icon: Database },
   { path: "/action-history", label: "Action History", icon: History },
+  { path: "/profile", label: "Profile", icon: User },
 ];
 
 export const Navigation = ({ isConnected }: NavigationProps) => {
