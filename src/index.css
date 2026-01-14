@@ -2,84 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 20% 97%;
+    --foreground: 220 25% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 25% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 25% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 220 70% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 15% 94%;
+    --secondary-foreground: 220 25% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 20% 96%;
+    --accent-foreground: 220 25% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 220 70% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* IoT Sensor Colors */
+    --sensor-temperature: 12 90% 62%;
+    --sensor-temperature-light: 12 100% 95%;
+    --sensor-temperature-gradient: linear-gradient(135deg, hsl(12, 90%, 62%) 0%, hsl(25, 95%, 55%) 100%);
+    
+    --sensor-humidity: 200 95% 60%;
+    --sensor-humidity-light: 200 100% 95%;
+    --sensor-humidity-gradient: linear-gradient(135deg, hsl(200, 95%, 60%) 0%, hsl(185, 100%, 50%) 100%);
+    
+    --sensor-light: 45 95% 55%;
+    --sensor-light-light: 45 100% 95%;
+    --sensor-light-gradient: linear-gradient(135deg, hsl(45, 95%, 55%) 0%, hsl(50, 100%, 65%) 100%);
+
+    /* Device Colors */
+    --device-off: 220 10% 70%;
+    --device-on: 150 70% 45%;
+    --device-loading: 220 70% 50%;
+    --device-failed: 0 84% 60%;
+
+    /* Chart Colors - Must match sensor colors */
+    --chart-temperature: hsl(12, 90%, 62%);
+    --chart-humidity: hsl(200, 95%, 60%);
+    --chart-light: hsl(45, 95%, 55%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    --shadow-glow-warm: 0 0 20px hsl(12, 90%, 62%, 0.3);
+    --shadow-glow-cool: 0 0 20px hsl(200, 95%, 60%, 0.3);
+    --shadow-glow-light: 0 0 20px hsl(45, 95%, 55%, 0.4);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -100,6 +115,160 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Sensor Card Variants */
+  .sensor-card {
+    @apply relative overflow-hidden rounded-2xl p-5 transition-all duration-300;
+    box-shadow: var(--shadow-md);
+  }
+
+  .sensor-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sensor-card-temperature {
+    background: linear-gradient(135deg, hsl(12 100% 97%) 0%, hsl(25 100% 96%) 100%);
+    border: 1px solid hsl(12 50% 90%);
+  }
+
+  .sensor-card-humidity {
+    background: linear-gradient(135deg, hsl(200 100% 97%) 0%, hsl(185 100% 96%) 100%);
+    border: 1px solid hsl(200 50% 90%);
+  }
+
+  .sensor-card-light {
+    background: linear-gradient(135deg, hsl(45 100% 97%) 0%, hsl(50 100% 96%) 100%);
+    border: 1px solid hsl(45 50% 88%);
+  }
+
+  /* Device Card Styles */
+  .device-card {
+    @apply relative overflow-hidden rounded-2xl p-6 bg-card transition-all duration-300;
+    box-shadow: var(--shadow-md);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .device-card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Glow Effects */
+  .glow-warm {
+    box-shadow: var(--shadow-glow-warm);
+  }
+
+  .glow-cool {
+    box-shadow: var(--shadow-glow-cool);
+  }
+
+  .glow-light {
+    box-shadow: var(--shadow-glow-light);
+  }
+
+  /* Animations */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes wave {
+    0%, 100% {
+      transform: translateX(0) scaleY(1);
+    }
+    25% {
+      transform: translateX(-2px) scaleY(1.02);
+    }
+    50% {
+      transform: translateX(0) scaleY(0.98);
+    }
+    75% {
+      transform: translateX(2px) scaleY(1.02);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+    50% {
+      opacity: 0.8;
+      filter: drop-shadow(0 0 16px currentColor);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 1.5s linear infinite;
+  }
+
+  .animate-wave {
+    animation: wave 2s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Chart Container */
+  .chart-container {
+    @apply rounded-2xl bg-card p-6;
+    box-shadow: var(--shadow-md);
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* Status Badge */
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .status-badge-success {
+    @apply bg-emerald-100 text-emerald-700;
+  }
+
+  .status-badge-warning {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  .status-badge-error {
+    @apply bg-red-100 text-red-700;
+  }
+
+  /* Header Styles */
+  .dashboard-header {
+    @apply sticky top-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border;
   }
 }
