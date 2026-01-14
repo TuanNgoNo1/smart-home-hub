@@ -139,74 +139,78 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
       </div>
 
       {/* Date/Time Range */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col xl:flex-row gap-4">
         {/* From DateTime */}
-        <div className="flex items-center gap-2 flex-1">
+        <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
           <Calendar className="w-4 h-4 text-muted-foreground flex-shrink-0" />
           <span className="text-sm text-muted-foreground whitespace-nowrap">Từ:</span>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                className={cn(
-                  "justify-start text-left font-normal flex-1 min-w-[140px]",
-                  !fromDate && "text-muted-foreground"
-                )}
-              >
-                {fromDate ? format(fromDate, "yyyy-MM-dd") : "Chọn ngày"}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
-              <CalendarComponent
-                mode="single"
-                selected={fromDate}
-                onSelect={handleFromDateChange}
-                initialFocus
-                className="p-3 pointer-events-auto"
-              />
-            </PopoverContent>
-          </Popover>
-          <input
-            type="time"
-            step="1"
-            value={fromTime}
-            onChange={(e) => handleFromTimeChange(e.target.value)}
-            className="flex h-10 w-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          />
+          <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "justify-start text-left font-normal w-full sm:w-auto sm:min-w-[130px]",
+                    !fromDate && "text-muted-foreground"
+                  )}
+                >
+                  {fromDate ? format(fromDate, "yyyy-MM-dd") : "Chọn ngày"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
+                <CalendarComponent
+                  mode="single"
+                  selected={fromDate}
+                  onSelect={handleFromDateChange}
+                  initialFocus
+                  className="p-3 pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+            <input
+              type="time"
+              step="1"
+              value={fromTime}
+              onChange={(e) => handleFromTimeChange(e.target.value)}
+              className="flex h-10 w-full sm:w-[110px] flex-shrink-0 rounded-md border border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            />
+          </div>
         </div>
 
         {/* To DateTime */}
-        <div className="flex items-center gap-2 flex-1">
+        <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
           <span className="text-sm text-muted-foreground whitespace-nowrap">Đến:</span>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                className={cn(
-                  "justify-start text-left font-normal flex-1 min-w-[140px]",
-                  !toDate && "text-muted-foreground"
-                )}
-              >
-                {toDate ? format(toDate, "yyyy-MM-dd") : "Chọn ngày"}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
-              <CalendarComponent
-                mode="single"
-                selected={toDate}
-                onSelect={handleToDateChange}
-                initialFocus
-                className="p-3 pointer-events-auto"
-              />
-            </PopoverContent>
-          </Popover>
-          <input
-            type="time"
-            step="1"
-            value={toTime}
-            onChange={(e) => handleToTimeChange(e.target.value)}
-            className="flex h-10 w-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          />
+          <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "justify-start text-left font-normal w-full sm:w-auto sm:min-w-[130px]",
+                    !toDate && "text-muted-foreground"
+                  )}
+                >
+                  {toDate ? format(toDate, "yyyy-MM-dd") : "Chọn ngày"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
+                <CalendarComponent
+                  mode="single"
+                  selected={toDate}
+                  onSelect={handleToDateChange}
+                  initialFocus
+                  className="p-3 pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+            <input
+              type="time"
+              step="1"
+              value={toTime}
+              onChange={(e) => handleToTimeChange(e.target.value)}
+              className="flex h-10 w-full sm:w-[110px] flex-shrink-0 rounded-md border border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            />
+          </div>
         </div>
       </div>
     </div>
