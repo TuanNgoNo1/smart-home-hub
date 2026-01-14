@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header } from "@/components/dashboard/Header";
+import { Navigation } from "@/components/shared/Navigation";
 import { SensorCard } from "@/components/dashboard/SensorCard";
 import { DeviceCard } from "@/components/dashboard/DeviceCard";
 import { RealtimeChart } from "@/components/dashboard/RealtimeChart";
@@ -13,7 +13,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header isConnected={isConnected} />
+      <Navigation isConnected={isConnected} />
 
       <main className="container mx-auto px-4 py-6 space-y-6">
         {/* Sensor Cards Section */}

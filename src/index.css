@@ -37,18 +37,17 @@
     --radius: 0.75rem;
 
     /* IoT Sensor Colors */
-    --sensor-temperature: 12 90% 62%;
+    --sensor-temperature: 12 90% 55%;
     --sensor-temperature-light: 12 100% 95%;
     --sensor-temperature-gradient: linear-gradient(135deg, hsl(12, 90%, 62%) 0%, hsl(25, 95%, 55%) 100%);
     
-    --sensor-humidity: 200 95% 60%;
+    --sensor-humidity: 200 95% 50%;
     --sensor-humidity-light: 200 100% 95%;
     --sensor-humidity-gradient: linear-gradient(135deg, hsl(200, 95%, 60%) 0%, hsl(185, 100%, 50%) 100%);
     
-    --sensor-light: 45 95% 55%;
+    --sensor-light: 45 95% 45%;
     --sensor-light-light: 45 100% 95%;
     --sensor-light-gradient: linear-gradient(135deg, hsl(45, 95%, 55%) 0%, hsl(50, 100%, 65%) 100%);
-
     /* Device Colors */
     --device-off: 220 10% 70%;
     --device-on: 150 70% 45%;
