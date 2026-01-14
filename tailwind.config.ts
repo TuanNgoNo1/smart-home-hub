@@ -4,6 +4,20 @@ export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
+  safelist: [
+    "bg-sensor-temperature/10",
+    "text-sensor-temperature",
+    "border-sensor-temperature/30",
+    "hover:bg-sensor-temperature/20",
+    "bg-sensor-humidity/10",
+    "text-sensor-humidity",
+    "border-sensor-humidity/30",
+    "hover:bg-sensor-humidity/20",
+    "bg-sensor-light/10",
+    "text-sensor-light",
+    "border-sensor-light/30",
+    "hover:bg-sensor-light/20",
+  ],
   theme: {
     container: {
       center: true,
