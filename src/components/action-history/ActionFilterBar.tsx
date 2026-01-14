@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { TimePicker } from "@/components/ui/time-picker";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ActionHistoryFilters, DeviceType } from "@/types/action";
@@ -154,7 +155,7 @@ export const ActionFilterBar = ({
                 <CalendarComponent mode="single" selected={fromDate} onSelect={handleFromDateChange} initialFocus className="p-3 pointer-events-auto" />
               </PopoverContent>
             </Popover>
-            <input type="time" step="1" value={fromTime} onChange={e => handleFromTimeChange(e.target.value)} className="flex h-10 w-full sm:w-[110px] flex-shrink-0 rounded-md border border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+            <TimePicker value={fromTime} onChange={handleFromTimeChange} />
           </div>
         </div>
 
@@ -172,7 +173,7 @@ export const ActionFilterBar = ({
                 <CalendarComponent mode="single" selected={toDate} onSelect={handleToDateChange} initialFocus className="p-3 pointer-events-auto" />
               </PopoverContent>
             </Popover>
-            <input type="time" step="1" value={toTime} onChange={e => handleToTimeChange(e.target.value)} className="flex h-10 w-full sm:w-[110px] flex-shrink-0 rounded-md border border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+            <TimePicker value={toTime} onChange={handleToTimeChange} />
           </div>
         </div>
       </div>
