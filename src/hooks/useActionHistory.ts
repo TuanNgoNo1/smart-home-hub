@@ -37,9 +37,25 @@ const fetchActionHistory = async (
 
   let filtered = [...mockData];
 
+  // Filter by search
+  if (filters.search) {
+    const searchLower = filters.search.toLowerCase();
+    filtered = filtered.filter((record) => 
+      record.id.toLowerCase().includes(searchLower) ||
+      record.deviceType.toLowerCase().includes(searchLower) ||
+      record.action.toLowerCase().includes(searchLower) ||
+      record.status.toLowerCase().includes(searchLower)
+    );
+  }
+
   // Filter by device type
   if (filters.deviceType !== "all") {
     filtered = filtered.filter((record) => record.deviceType === filters.deviceType);
+  }
+
+  // Filter by status
+  if (filters.status !== "all") {
+    filtered = filtered.filter((record) => record.status === filters.status);
   }
 
   // Filter by date range
@@ -75,6 +91,8 @@ const fetchActionHistory = async (
 
 const defaultFilters: ActionHistoryFilters = {
   deviceType: "all",
+  status: "all",
+  search: "",
   fromDate: "",
   toDate: "",
   sortOrder: "desc",
@@ -107,6 +125,8 @@ export const useActionHistory = () => {
   // Parse filters from URL
   const filters: ActionHistoryFilters = useMemo(() => ({
     deviceType: (searchParams.get("deviceType") as DeviceType | "all") || defaultFilters.deviceType,
+    status: (searchParams.get("status") as ActionStatus | "all") || defaultFilters.status,
+    search: searchParams.get("search") || defaultFilters.search,
     fromDate: searchParams.get("fromDate") || defaultFilters.fromDate,
     toDate: searchParams.get("toDate") || defaultFilters.toDate,
     sortOrder: (searchParams.get("sortOrder") as "asc" | "desc") || defaultFilters.sortOrder,
