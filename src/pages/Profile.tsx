@@ -1,6 +1,5 @@
 import { Navigation } from "@/components/shared/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { 
@@ -20,15 +19,16 @@ import {
 } from "lucide-react";
 
 const Profile = () => {
-  // Personal Information
+  // Personal Information - Update these with real data
   const profileData = {
-    name: "Nguyễn Văn A",
-    className: "CNTT-K20",
-    studentId: "B20DCCN001",
-    avatarUrl: "", // Add your avatar URL here
+    name: "Ngô Đức Anh Tuấn",
+    className: "D22PTDPT02",
+    studentId: "B22DCPT248",
+    avatarUrl: "",
+    description: "Đồ án IoT - Hệ thống giám sát và điều khiển thiết bị thông minh",
   };
 
-  // Important Links
+  // Important Links - Update these with real URLs
   const links = {
     reportPdf: "https://example.com/report.pdf",
     apiDocs: "https://example.com/swagger",
@@ -50,44 +50,52 @@ const Profile = () => {
     password: "demo123",
   };
 
+  const getInitials = (name: string) => {
+    const parts = name.split(' ');
+    if (parts.length >= 2) {
+      return parts[0][0] + parts[parts.length - 1][0];
+    }
+    return name.substring(0, 2).toUpperCase();
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation isConnected={true} />
       
       <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="max-w-3xl mx-auto space-y-6">
           
-          {/* Profile Header Card */}
-          <Card className="overflow-hidden">
-            <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-8">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+          {/* Profile Header Card - Gradient Style */}
+          <Card className="overflow-hidden border-0 shadow-lg">
+            <div className="bg-gradient-to-r from-blue-50 via-blue-100/50 to-green-50 p-8">
+              <div className="flex items-center gap-6">
                 {/* Avatar */}
-                <Avatar className="w-32 h-32 border-4 border-background shadow-lg">
+                <Avatar className="w-28 h-28 border-4 border-white shadow-xl">
                   <AvatarImage src={profileData.avatarUrl} alt={profileData.name} />
-                  <AvatarFallback className="text-3xl font-semibold bg-primary/10 text-primary">
-                    {profileData.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600">
+                    {getInitials(profileData.name)}
                   </AvatarFallback>
                 </Avatar>
                 
                 {/* Personal Info */}
-                <div className="text-center md:text-left space-y-3">
-                  <h1 className="text-3xl font-bold text-foreground">
+                <div className="space-y-2">
+                  <h1 className="text-3xl font-bold text-emerald-600">
                     {profileData.name}
                   </h1>
                   
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
-                    <div className="flex items-center justify-center md:justify-start gap-2 text-muted-foreground">
+                  <div className="flex items-center gap-4 text-muted-foreground">
+                    <div className="flex items-center gap-1.5">
                       <GraduationCap className="w-4 h-4" />
                       <span className="font-medium">{profileData.className}</span>
                     </div>
-                    <div className="flex items-center justify-center md:justify-start gap-2 text-muted-foreground">
+                    <div className="flex items-center gap-1.5">
                       <IdCard className="w-4 h-4" />
                       <span className="font-medium">{profileData.studentId}</span>
                     </div>
                   </div>
 
-                  <p className="text-muted-foreground text-sm max-w-md">
-                    Đồ án IoT - Hệ thống giám sát và điều khiển thiết bị thông minh
+                  <p className="text-muted-foreground text-sm">
+                    {profileData.description}
                   </p>
                 </div>
               </div>
@@ -96,66 +104,69 @@ const Profile = () => {
 
           {/* Important Links */}
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-base font-semibold">
                 <ExternalLink className="w-5 h-5 text-primary" />
                 Liên kết quan trọng
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 {/* PDF Report */}
-                <Button
-                  variant="outline"
-                  className="h-auto py-4 px-4 flex flex-col items-center gap-2 hover:bg-primary/5 hover:border-primary transition-all group"
-                  asChild
+                <a 
+                  href={links.reportPdf} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-3 p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-muted/50 transition-all group"
                 >
-                  <a href={links.reportPdf} target="_blank" rel="noopener noreferrer">
-                    <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <FileText className="w-6 h-6 text-red-600" />
-                    </div>
-                    <span className="font-medium text-foreground">Báo cáo PDF</span>
+                  <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <FileText className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div className="text-center">
+                    <span className="font-medium text-foreground block">Báo cáo PDF</span>
                     <span className="text-xs text-muted-foreground">Xem tài liệu</span>
-                  </a>
-                </Button>
+                  </div>
+                </a>
 
                 {/* API Documentation */}
-                <Button
-                  variant="outline"
-                  className="h-auto py-4 px-4 flex flex-col items-center gap-2 hover:bg-primary/5 hover:border-primary transition-all group"
-                  asChild
+                <a 
+                  href={links.apiDocs} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-3 p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-muted/50 transition-all group"
                 >
-                  <a href={links.apiDocs} target="_blank" rel="noopener noreferrer">
-                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <BookOpen className="w-6 h-6 text-green-600" />
-                    </div>
-                    <span className="font-medium text-foreground">API Docs</span>
+                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <BookOpen className="w-6 h-6 text-blue-500" />
+                  </div>
+                  <div className="text-center">
+                    <span className="font-medium text-foreground block">API Docs</span>
                     <span className="text-xs text-muted-foreground">Swagger UI</span>
-                  </a>
-                </Button>
+                  </div>
+                </a>
 
                 {/* Git Repository */}
-                <Button
-                  variant="outline"
-                  className="h-auto py-4 px-4 flex flex-col items-center gap-2 hover:bg-primary/5 hover:border-primary transition-all group"
-                  asChild
+                <a 
+                  href={links.gitRepo} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-3 p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-muted/50 transition-all group"
                 >
-                  <a href={links.gitRepo} target="_blank" rel="noopener noreferrer">
-                    <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Github className="w-6 h-6 text-gray-700" />
-                    </div>
-                    <span className="font-medium text-foreground">Source Code</span>
+                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Github className="w-6 h-6 text-gray-600" />
+                  </div>
+                  <div className="text-center">
+                    <span className="font-medium text-foreground block">Source Code</span>
                     <span className="text-xs text-muted-foreground">GitHub Repository</span>
-                  </a>
-                </Button>
+                  </div>
+                </a>
               </div>
             </CardContent>
           </Card>
 
           {/* Tech Stack */}
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-base font-semibold">
                 <Cpu className="w-5 h-5 text-primary" />
                 Tech Stack
               </CardTitle>
@@ -163,13 +174,13 @@ const Profile = () => {
             <CardContent className="space-y-4">
               {/* Hardware */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Cpu className="w-4 h-4" />
                   Hardware
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {techStack.hardware.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-200">
+                    <Badge key={tech} variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 font-normal">
                       {tech}
                     </Badge>
                   ))}
@@ -178,13 +189,13 @@ const Profile = () => {
 
               {/* Protocol */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Radio className="w-4 h-4" />
                   Protocol
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {techStack.protocol.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="bg-purple-100 text-purple-700 hover:bg-purple-200">
+                    <Badge key={tech} variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 font-normal">
                       {tech}
                     </Badge>
                   ))}
@@ -193,13 +204,13 @@ const Profile = () => {
 
               {/* Backend */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Server className="w-4 h-4" />
                   Backend
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {techStack.backend.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-200">
+                    <Badge key={tech} variant="outline" className="bg-green-50 text-green-700 border-green-200 font-normal">
                       {tech}
                     </Badge>
                   ))}
@@ -208,13 +219,13 @@ const Profile = () => {
 
               {/* Frontend */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Globe className="w-4 h-4" />
                   Frontend
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {techStack.frontend.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="bg-cyan-100 text-cyan-700 hover:bg-cyan-200">
+                    <Badge key={tech} variant="outline" className="bg-cyan-50 text-cyan-700 border-cyan-200 font-normal">
                       {tech}
                     </Badge>
                   ))}
@@ -223,13 +234,13 @@ const Profile = () => {
 
               {/* Database */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Database className="w-4 h-4" />
                   Database
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {techStack.database.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="bg-orange-100 text-orange-700 hover:bg-orange-200">
+                    <Badge key={tech} variant="outline" className="bg-red-50 text-red-700 border-red-200 font-normal">
                       {tech}
                     </Badge>
                   ))}
@@ -239,30 +250,30 @@ const Profile = () => {
           </Card>
 
           {/* Demo Credentials */}
-          <Card className="border-dashed">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
+          <Card>
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-base font-semibold">
                 <Key className="w-5 h-5 text-primary" />
                 Demo Credentials
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="bg-muted/50 rounded-lg p-4 space-y-3">
+              <div className="bg-muted/50 rounded-xl p-4 space-y-3">
                 <div className="flex items-center gap-3">
                   <User className="w-4 h-4 text-muted-foreground" />
                   <span className="text-sm text-muted-foreground w-20">Username:</span>
-                  <code className="bg-background px-2 py-1 rounded text-sm font-mono">
+                  <code className="bg-background px-3 py-1 rounded-lg text-sm font-mono border">
                     {demoCredentials.username}
                   </code>
                 </div>
                 <div className="flex items-center gap-3">
                   <Key className="w-4 h-4 text-muted-foreground" />
                   <span className="text-sm text-muted-foreground w-20">Password:</span>
-                  <code className="bg-background px-2 py-1 rounded text-sm font-mono">
+                  <code className="bg-background px-3 py-1 rounded-lg text-sm font-mono border">
                     {demoCredentials.password}
                   </code>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2 pt-2 border-t">
+                <p className="text-xs text-muted-foreground mt-3 pt-3 border-t border-border">
                   * Sử dụng thông tin trên để đăng nhập vào hệ thống demo
                 </p>
               </div>

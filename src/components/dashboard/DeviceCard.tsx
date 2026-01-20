@@ -14,18 +14,26 @@ interface DeviceCardProps {
 const deviceConfig: Record<DeviceType, {
   label: string;
   labelVi: string;
+  iconBgOn: string;
+  iconColorOn: string;
 }> = {
   light: {
     label: "Light",
     labelVi: "Đèn",
+    iconBgOn: "bg-amber-100",
+    iconColorOn: "text-amber-500",
   },
   fan: {
     label: "Fan",
     labelVi: "Quạt",
+    iconBgOn: "bg-blue-100",
+    iconColorOn: "text-blue-500",
   },
   ac: {
     label: "Air Conditioner",
     labelVi: "Điều hòa",
+    iconBgOn: "bg-cyan-100",
+    iconColorOn: "text-cyan-500",
   },
 };
 
@@ -50,8 +58,8 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
             className={cn(
               baseClasses,
               isOn 
-                ? "text-amber-400 fill-amber-400 animate-pulse-glow" 
-                : "text-device-off"
+                ? "text-amber-500" 
+                : "text-gray-400"
             )} 
           />
         );
@@ -61,8 +69,8 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
             className={cn(
               baseClasses,
               isOn 
-                ? "text-sensor-humidity animate-spin-slow" 
-                : "text-device-off"
+                ? "text-blue-500 animate-spin-slow" 
+                : "text-gray-400"
             )} 
           />
         );
@@ -73,7 +81,7 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
               baseClasses,
               isOn 
                 ? "text-cyan-500 animate-wave" 
-                : "text-device-off"
+                : "text-gray-400"
             )} 
           />
         );
@@ -92,29 +100,29 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
   return (
     <div className={cn(
       "device-card flex flex-col items-center text-center",
-      isOn && "ring-2 ring-device-on/30",
+      isOn && "ring-2 ring-device-on/30 border-device-on/50",
       isFailed && "ring-2 ring-device-failed/30"
     )}>
       {/* Status indicator */}
       <div className={cn(
         "absolute top-4 right-4 w-2.5 h-2.5 rounded-full transition-all duration-300",
-        state === "off" && "bg-device-off",
-        state === "loading" && "bg-device-loading animate-pulse",
-        state === "on" && "bg-device-on shadow-[0_0_8px_hsl(150,70%,45%)]",
-        state === "failed" && "bg-device-failed animate-pulse"
+        state === "off" && "bg-gray-300",
+        state === "loading" && "bg-amber-400 animate-pulse",
+        state === "on" && "bg-emerald-500 shadow-[0_0_8px_hsl(150,70%,45%)]",
+        state === "failed" && "bg-red-500 animate-pulse"
       )} />
 
       {/* Icon Container */}
       <div className={cn(
         "relative w-24 h-24 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300",
-        isOn && type === "light" && "bg-amber-100/50 shadow-glow-light",
-        isOn && type === "fan" && "bg-blue-100/50 shadow-glow-cool",
-        isOn && type === "ac" && "bg-cyan-100/50 shadow-glow-cool",
-        !isOn && !isFailed && "bg-muted",
-        isFailed && "bg-red-100/50"
+        isOn && type === "light" && "bg-amber-50",
+        isOn && type === "fan" && "bg-blue-50",
+        isOn && type === "ac" && "bg-cyan-50",
+        !isOn && !isFailed && "bg-gray-100",
+        isFailed && "bg-red-50"
       )}>
         {isLoading ? (
-          <Loader2 className="w-12 h-12 text-device-loading animate-spin" />
+          <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
         ) : (
           renderIcon()
         )}
@@ -127,9 +135,9 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
       <p className={cn(
         "text-sm font-medium mb-4",
         state === "off" && "text-muted-foreground",
-        state === "loading" && "text-device-loading",
-        state === "on" && "text-device-on",
-        state === "failed" && "text-device-failed"
+        state === "loading" && "text-amber-500",
+        state === "on" && "text-emerald-600",
+        state === "failed" && "text-red-500"
       )}>
         {getStateLabel()}
       </p>
@@ -140,9 +148,9 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
         disabled={isDisabled}
         className={cn(
           "w-full transition-all duration-300",
-          isOn && "bg-device-on hover:bg-device-on/90",
-          !isOn && !isFailed && "bg-foreground hover:bg-foreground/90",
-          isFailed && "bg-device-failed hover:bg-device-failed/90"
+          isOn && "bg-emerald-500 hover:bg-emerald-600",
+          !isOn && !isFailed && "bg-gray-900 hover:bg-gray-800",
+          isFailed && "bg-red-500 hover:bg-red-600"
         )}
       >
         {isLoading ? (

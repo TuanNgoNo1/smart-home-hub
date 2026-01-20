@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { ArrowUpDown } from "lucide-react";
 
 interface SensorDataTableProps {
   data: SensorRecord[];
@@ -27,17 +28,17 @@ const sensorConfig: Record<
   temperature: {
     label: "Nhiệt độ",
     unit: "°C",
-    badgeClass: "bg-sensor-temperature/10 text-sensor-temperature border-sensor-temperature/30 hover:bg-sensor-temperature/20",
+    badgeClass: "bg-orange-100 text-orange-600 border-orange-200",
   },
   humidity: {
     label: "Độ ẩm",
     unit: "%",
-    badgeClass: "bg-sensor-humidity/10 text-sensor-humidity border-sensor-humidity/30 hover:bg-sensor-humidity/20",
+    badgeClass: "bg-blue-100 text-blue-600 border-blue-200",
   },
   light: {
     label: "Ánh sáng",
     unit: "lux",
-    badgeClass: "bg-sensor-light/10 text-sensor-light border-sensor-light/30 hover:bg-sensor-light/20",
+    badgeClass: "bg-amber-100 text-amber-600 border-amber-200",
   },
 };
 
@@ -59,19 +60,19 @@ export const SensorDataTable = ({
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
-              <TableHead className="w-[120px]">ID</TableHead>
-              <TableHead className="w-[150px]">Loại cảm biến</TableHead>
-              <TableHead className="w-[120px]">Giá trị</TableHead>
+              <TableHead className="w-[80px]">ID</TableHead>
+              <TableHead className="w-[120px]">Loại cảm biến</TableHead>
+              <TableHead className="w-[100px]">Giá trị</TableHead>
               <TableHead>Thời gian</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {Array.from({ length: 5 }).map((_, i) => (
+            {Array.from({ length: 10 }).map((_, i) => (
               <TableRow key={i}>
-                <TableCell><Skeleton className="h-4 w-20" /></TableCell>
-                <TableCell><Skeleton className="h-6 w-24" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-8" /></TableCell>
+                <TableCell><Skeleton className="h-6 w-20" /></TableCell>
                 <TableCell><Skeleton className="h-4 w-16" /></TableCell>
-                <TableCell><Skeleton className="h-4 w-40" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-36" /></TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -92,26 +93,24 @@ export const SensorDataTable = ({
     <div className="bg-card rounded-xl border border-border overflow-hidden">
       <Table>
         <TableHeader>
-          <TableRow className="bg-muted/50 hover:bg-muted/50">
-            <TableHead className="w-[120px] font-semibold">ID</TableHead>
-            <TableHead className="w-[150px] font-semibold">Loại cảm biến</TableHead>
+          <TableRow className="bg-muted/30 hover:bg-muted/30">
+            <TableHead className="w-[80px] font-medium text-muted-foreground">ID</TableHead>
+            <TableHead className="w-[120px] font-medium text-muted-foreground">Loại cảm biến</TableHead>
+            <TableHead className="w-[100px] font-medium text-muted-foreground">Giá trị</TableHead>
             <TableHead
               className={cn(
-                "w-[120px] font-semibold",
-                onSort && "cursor-pointer hover:text-foreground transition-colors"
-              )}
-              onClick={() => onSort?.("value")}
-            >
-              Giá trị{renderSortIndicator("value")}
-            </TableHead>
-            <TableHead
-              className={cn(
-                "font-semibold",
+                "font-medium text-muted-foreground",
                 onSort && "cursor-pointer hover:text-foreground transition-colors"
               )}
               onClick={() => onSort?.("timestamp")}
             >
-              Thời gian{renderSortIndicator("timestamp")}
+              <span className="flex items-center gap-1">
+                Thời gian
+                {sortBy === "timestamp" && (
+                  <ArrowUpDown className="w-3 h-3" />
+                )}
+                {renderSortIndicator("timestamp")}
+              </span>
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -119,25 +118,25 @@ export const SensorDataTable = ({
           {data.map((record) => {
             const config = sensorConfig[record.sensorType];
             return (
-              <TableRow key={record.id} className="hover:bg-muted/30 transition-colors">
-                <TableCell className="font-mono text-sm text-muted-foreground">
+              <TableRow key={record.id} className="hover:bg-muted/30 transition-colors border-b border-border/50">
+                <TableCell className="font-medium text-primary">
                   {record.id}
                 </TableCell>
                 <TableCell>
                   <Badge
                     variant="outline"
-                    className={cn("font-medium", config.badgeClass)}
+                    className={cn("font-medium text-xs px-2 py-0.5", config.badgeClass)}
                   >
                     {config.label}
                   </Badge>
                 </TableCell>
-                <TableCell className="font-semibold">
-                  {record.value}
-                  <span className="text-muted-foreground ml-1 font-normal">
+                <TableCell>
+                  <span className="font-semibold">{record.value}</span>
+                  <span className="text-muted-foreground ml-1 text-sm">
                     {config.unit}
                   </span>
                 </TableCell>
-                <TableCell className="font-mono text-sm">
+                <TableCell className="font-mono text-sm text-muted-foreground">
                   {format(new Date(record.timestamp), "yyyy-MM-dd HH:mm:ss")}
                 </TableCell>
               </TableRow>
