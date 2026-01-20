@@ -1,10 +1,8 @@
-import { Search, Calendar, Filter, ArrowUpDown, Lightbulb, Fan, Snowflake, RefreshCw } from "lucide-react";
+import { Search, Filter, ArrowUpDown, Lightbulb, Fan, Snowflake } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { TimePicker } from "@/components/ui/time-picker";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ActionHistoryFilters, DeviceType, ActionStatus } from "@/types/action";
@@ -174,64 +172,75 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
       </div>
 
       {/* Row 2: Date/Time Range */}
-      <div className="flex flex-wrap items-center gap-3">
-        {/* From DateTime */}
+      <div className="flex flex-wrap items-center gap-4">
+        {/* From DateTime - Combined Input */}
         <div className="flex items-center gap-2">
-          <Calendar className="w-4 h-4 text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">Từ:</span>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className={cn(
-                  "h-8 text-xs font-normal",
-                  !fromDate && "text-muted-foreground"
-                )}
-              >
-                {fromDate ? format(fromDate, "dd/MM/yyyy") : "Ngày"}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
-              <CalendarComponent
-                mode="single"
-                selected={fromDate}
-                onSelect={handleFromDateChange}
-                initialFocus
-                className="p-3 pointer-events-auto"
-              />
-            </PopoverContent>
-          </Popover>
-          <TimePicker value={fromTime} onChange={handleFromTimeChange} />
+          <span className="text-sm font-medium text-foreground">Từ</span>
+          <div className="flex items-center border border-input rounded-md bg-background overflow-hidden">
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  className={cn(
+                    "h-9 px-3 text-sm border-r border-input hover:bg-muted transition-colors",
+                    !fromDate && "text-muted-foreground"
+                  )}
+                >
+                  {fromDate ? format(fromDate, "dd/MM/yyyy") : "dd/mm/yyyy"}
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
+                <CalendarComponent
+                  mode="single"
+                  selected={fromDate}
+                  onSelect={handleFromDateChange}
+                  initialFocus
+                  className="p-3 pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+            <input
+              type="text"
+              value={fromTime}
+              onChange={(e) => handleFromTimeChange(e.target.value)}
+              placeholder="00:00:00"
+              className="h-9 w-[80px] px-2 text-sm bg-transparent focus:outline-none text-center"
+            />
+          </div>
         </div>
 
-        {/* To DateTime */}
+        {/* To DateTime - Combined Input */}
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Đến:</span>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className={cn(
-                  "h-8 text-xs font-normal",
-                  !toDate && "text-muted-foreground"
-                )}
-              >
-                {toDate ? format(toDate, "dd/MM/yyyy") : "Ngày"}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
-              <CalendarComponent
-                mode="single"
-                selected={toDate}
-                onSelect={handleToDateChange}
-                initialFocus
-                className="p-3 pointer-events-auto"
-              />
-            </PopoverContent>
-          </Popover>
-          <TimePicker value={toTime} onChange={handleToTimeChange} />
+          <span className="text-sm font-medium text-foreground">Đến</span>
+          <div className="flex items-center border border-input rounded-md bg-background overflow-hidden">
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  className={cn(
+                    "h-9 px-3 text-sm border-r border-input hover:bg-muted transition-colors",
+                    !toDate && "text-muted-foreground"
+                  )}
+                >
+                  {toDate ? format(toDate, "dd/MM/yyyy") : "dd/mm/yyyy"}
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
+                <CalendarComponent
+                  mode="single"
+                  selected={toDate}
+                  onSelect={handleToDateChange}
+                  initialFocus
+                  className="p-3 pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+            <input
+              type="text"
+              value={toTime}
+              onChange={(e) => handleToTimeChange(e.target.value)}
+              placeholder="23:59:59"
+              className="h-9 w-[80px] px-2 text-sm bg-transparent focus:outline-none text-center"
+            />
+          </div>
         </div>
       </div>
     </div>
