@@ -1,4 +1,4 @@
-import { Search, Filter, ArrowUpDown, Clock } from "lucide-react";
+import { Search, Filter, ArrowUpDown, Clock, Calendar } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -186,7 +186,7 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
       </div>
 
       {/* Row 2: Quick Filters + Date/Time Range */}
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center gap-3">
         {/* Quick Time Filters */}
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4 text-muted-foreground" />
@@ -205,74 +205,75 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
 
         <div className="h-6 w-px bg-border hidden sm:block" />
 
-        {/* From DateTime - Combined Input */}
+        {/* From DateTime */}
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-foreground">Từ</span>
-          <div className="flex items-center border border-input rounded-md bg-background overflow-hidden">
-            <Popover>
-              <PopoverTrigger asChild>
-                <button
-                  className={cn(
-                    "h-9 px-3 text-sm border-r border-input hover:bg-muted transition-colors",
-                    !fromDate && "text-muted-foreground"
-                  )}
-                >
-                  {fromDate ? format(fromDate, "dd/MM/yyyy") : "dd/mm/yyyy"}
-                </button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
-                <CalendarComponent
-                  mode="single"
-                  selected={fromDate}
-                  onSelect={handleFromDateChange}
-                  initialFocus
-                  className="p-3 pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
-            <input
-              type="text"
-              value={fromTime}
-              onChange={(e) => handleFromTimeChange(e.target.value)}
-              placeholder="00:00:00"
-              className="h-9 w-[80px] px-2 text-sm bg-transparent focus:outline-none text-center"
-            />
-          </div>
+          <Calendar className="w-4 h-4 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">Từ:</span>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className={cn(
+                  "h-8 px-3 text-sm font-normal",
+                  !fromDate && "text-muted-foreground"
+                )}
+              >
+                {fromDate ? format(fromDate, "dd/MM/yyyy") : "Chọn ngày"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
+              <CalendarComponent
+                mode="single"
+                selected={fromDate}
+                onSelect={handleFromDateChange}
+                initialFocus
+                className="p-3 pointer-events-auto"
+              />
+            </PopoverContent>
+          </Popover>
+          <Input
+            type="text"
+            value={fromTime}
+            onChange={(e) => handleFromTimeChange(e.target.value)}
+            placeholder="00:00:00"
+            className="h-8 w-[90px] px-2 text-sm text-center font-mono"
+          />
         </div>
 
-        {/* To DateTime - Combined Input */}
+        {/* To DateTime */}
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-foreground">Đến</span>
-          <div className="flex items-center border border-input rounded-md bg-background overflow-hidden">
-            <Popover>
-              <PopoverTrigger asChild>
-                <button
-                  className={cn(
-                    "h-9 px-3 text-sm border-r border-input hover:bg-muted transition-colors",
-                    !toDate && "text-muted-foreground"
-                  )}
-                >
-                  {toDate ? format(toDate, "dd/MM/yyyy") : "dd/mm/yyyy"}
-                </button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
-                <CalendarComponent
-                  mode="single"
-                  selected={toDate}
-                  onSelect={handleToDateChange}
-                  initialFocus
-                  className="p-3 pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
-            <input
-              type="text"
-              value={toTime}
-              onChange={(e) => handleToTimeChange(e.target.value)}
-              placeholder="23:59:59"
-              className="h-9 w-[80px] px-2 text-sm bg-transparent focus:outline-none text-center"
-            />
-          </div>
+          <span className="text-sm text-muted-foreground">Đến:</span>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className={cn(
+                  "h-8 px-3 text-sm font-normal",
+                  !toDate && "text-muted-foreground"
+                )}
+              >
+                {toDate ? format(toDate, "dd/MM/yyyy") : "Chọn ngày"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
+              <CalendarComponent
+                mode="single"
+                selected={toDate}
+                onSelect={handleToDateChange}
+                initialFocus
+                className="p-3 pointer-events-auto"
+              />
+            </PopoverContent>
+          </Popover>
+          <Input
+            type="text"
+            value={toTime}
+            onChange={(e) => handleToTimeChange(e.target.value)}
+            placeholder="23:59:59"
+            className="h-8 w-[90px] px-2 text-sm text-center font-mono"
+          />
         </div>
       </div>
     </div>
