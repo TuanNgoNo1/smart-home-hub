@@ -1,9 +1,9 @@
 import { Bell, Trash2, ChevronLeft, ChevronRight, Check, Clock, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-
 interface Notification {
   id: string;
   type: "success" | "pending" | "error";
@@ -70,7 +70,7 @@ export const NotificationPanel = ({ notifications, onClear }: NotificationPanelP
   const deviceCount = notifications.filter(n => n.device).length;
 
   return (
-    <div className="bg-card rounded-2xl border border-border p-4 h-full flex flex-col">
+    <div className="bg-card rounded-2xl border border-border p-4 h-[400px] flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -126,40 +126,42 @@ export const NotificationPanel = ({ notifications, onClear }: NotificationPanelP
       </div>
 
       {/* Notifications List */}
-      <div className="flex-1 overflow-y-auto space-y-2">
-        {notifications.map((notification) => (
-          <div
-            key={notification.id}
-            className="flex items-start gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
-          >
-            <div className={cn(
-              "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
-              getIconBg(notification.type)
-            )}>
-              {getIcon(notification.type)}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-sm text-foreground truncate">
-                  {notification.title}
-                </span>
-                {notification.device && (
-                  <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full" />
-                    device
-                  </span>
-                )}
+      <ScrollArea className="flex-1 -mx-2 px-2">
+        <div className="space-y-2 pr-2">
+          {notifications.map((notification) => (
+            <div
+              key={notification.id}
+              className="flex items-start gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+            >
+              <div className={cn(
+                "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
+                getIconBg(notification.type)
+              )}>
+                {getIcon(notification.type)}
               </div>
-              <p className="text-xs text-muted-foreground truncate">
-                {notification.subtitle}
-              </p>
-              <p className="text-[10px] text-muted-foreground/70 mt-0.5">
-                {formatTime(notification.timestamp)} • {getTimeAgo(notification.timestamp)}
-              </p>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-sm text-foreground truncate">
+                    {notification.title}
+                  </span>
+                  {notification.device && (
+                    <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full" />
+                      device
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground truncate">
+                  {notification.subtitle}
+                </p>
+                <p className="text-[10px] text-muted-foreground/70 mt-0.5">
+                  {formatTime(notification.timestamp)} • {getTimeAgo(notification.timestamp)}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   );
 };
