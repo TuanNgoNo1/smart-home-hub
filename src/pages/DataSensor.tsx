@@ -3,8 +3,11 @@ import { Navigation } from "@/components/shared/Navigation";
 import { SensorFilterBar } from "@/components/sensor-history/SensorFilterBar";
 import { SensorDataTable } from "@/components/sensor-history/SensorDataTable";
 import { SensorPagination } from "@/components/sensor-history/SensorPagination";
+import { ExportDropdown } from "@/components/shared/ExportDropdown";
 import { useSensorHistory } from "@/hooks/useSensorHistory";
+import { exportSensorDataToCSV, exportSensorDataToExcel } from "@/lib/export-utils";
 import { Database } from "lucide-react";
+import { toast } from "sonner";
 
 const DataSensor = () => {
   const [isConnected] = useState(true);
@@ -24,17 +27,29 @@ const DataSensor = () => {
 
       <main className="container mx-auto px-4 py-6 space-y-6">
         {/* Page Header */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10">
-            <Database className="w-5 h-5 text-primary" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10">
+              <Database className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground">Data Sensor</h1>
+              <p className="text-sm text-muted-foreground">Lịch sử dữ liệu cảm biến</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl font-semibold text-foreground">Data Sensor</h1>
-            <p className="text-sm text-muted-foreground">Lịch sử dữ liệu cảm biến</p>
-          </div>
-        </div>
 
-        {/* Filter Bar */}
+          <ExportDropdown
+            onExportCSV={() => {
+              exportSensorDataToCSV(data);
+              toast.success("Đã xuất file CSV thành công!");
+            }}
+            onExportExcel={() => {
+              exportSensorDataToExcel(data);
+              toast.success("Đã xuất file Excel thành công!");
+            }}
+            disabled={data.length === 0}
+          />
+        </div>
         <SensorFilterBar filters={filters} onFilterChange={updateFilters} />
 
         {/* Data Table */}

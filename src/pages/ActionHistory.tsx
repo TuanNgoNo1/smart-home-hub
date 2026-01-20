@@ -3,9 +3,12 @@ import { Navigation } from "@/components/shared/Navigation";
 import { ActionFilterBar } from "@/components/action-history/ActionFilterBar";
 import { ActionDataTable } from "@/components/action-history/ActionDataTable";
 import { ActionPagination } from "@/components/action-history/ActionPagination";
+import { ExportDropdown } from "@/components/shared/ExportDropdown";
 import { useActionHistory } from "@/hooks/useActionHistory";
+import { exportActionHistoryToCSV, exportActionHistoryToExcel } from "@/lib/export-utils";
 import { History, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const ActionHistory = () => {
   const [isConnected] = useState(true);
@@ -45,16 +48,29 @@ const ActionHistory = () => {
             </div>
           </div>
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleManualRefresh}
-            disabled={isRefreshing}
-            className="gap-2"
-          >
-            <RefreshCw className={cn("w-4 h-4", isRefreshing && "animate-spin")} />
-            <span className="hidden sm:inline">Làm mới</span>
-          </Button>
+          <div className="flex items-center gap-2">
+            <ExportDropdown
+              onExportCSV={() => {
+                exportActionHistoryToCSV(data);
+                toast.success("Đã xuất file CSV thành công!");
+              }}
+              onExportExcel={() => {
+                exportActionHistoryToExcel(data);
+                toast.success("Đã xuất file Excel thành công!");
+              }}
+              disabled={data.length === 0}
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleManualRefresh}
+              disabled={isRefreshing}
+              className="gap-2"
+            >
+              <RefreshCw className={cn("w-4 h-4", isRefreshing && "animate-spin")} />
+              <span className="hidden sm:inline">Làm mới</span>
+            </Button>
+          </div>
         </div>
 
         {/* Filter Bar */}
