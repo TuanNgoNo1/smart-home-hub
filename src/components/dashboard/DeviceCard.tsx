@@ -1,6 +1,6 @@
 import { Lightbulb, Fan, Snowflake, AlertCircle, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { DeviceToggle } from "./DeviceToggle";
 
 type DeviceType = "light" | "fan" | "ac";
 type DeviceState = "off" | "loading" | "on" | "failed";
@@ -142,30 +142,12 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
         {getStateLabel()}
       </p>
 
-      {/* Toggle Button */}
-      <Button
-        onClick={onToggle}
+      {/* Toggle Switch */}
+      <DeviceToggle
+        state={state}
+        onToggle={onToggle}
         disabled={isDisabled}
-        className={cn(
-          "w-full transition-all duration-300",
-          isOn && "bg-emerald-500 hover:bg-emerald-600",
-          !isOn && !isFailed && "bg-gray-900 hover:bg-gray-800",
-          isFailed && "bg-red-500 hover:bg-red-600"
-        )}
-      >
-        {isLoading ? (
-          <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Đang xử lý
-          </>
-        ) : isFailed ? (
-          "Thử lại"
-        ) : isOn ? (
-          "Tắt thiết bị"
-        ) : (
-          "Bật thiết bị"
-        )}
-      </Button>
+      />
     </div>
   );
 };
