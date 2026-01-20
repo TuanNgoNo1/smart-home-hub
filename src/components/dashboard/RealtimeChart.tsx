@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 interface ChartDataPoint {
   time: string;
@@ -20,10 +20,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           <div key={index} className="flex items-center gap-2 text-sm">
             <div 
               className="w-2.5 h-2.5 rounded-full" 
-              style={{ backgroundColor: entry.color }}
+              style={{ backgroundColor: entry.stroke }}
             />
             <span className="text-muted-foreground">{entry.name}:</span>
-            <span className="font-mono font-medium" style={{ color: entry.color }}>
+            <span className="font-mono font-medium" style={{ color: entry.stroke }}>
               {entry.value}
               {entry.name === "Nhiệt độ" && "°C"}
               {entry.name === "Độ ẩm" && "%"}
@@ -63,10 +63,24 @@ export const RealtimeChart = ({ data }: RealtimeChartProps) => {
 
       <div className="h-[300px] w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart
+          <AreaChart
             data={data}
             margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
           >
+            <defs>
+              <linearGradient id="gradientTemperature" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="hsl(12, 90%, 62%)" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="hsl(12, 90%, 62%)" stopOpacity={0.05} />
+              </linearGradient>
+              <linearGradient id="gradientHumidity" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="hsl(200, 95%, 60%)" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="hsl(200, 95%, 60%)" stopOpacity={0.05} />
+              </linearGradient>
+              <linearGradient id="gradientLight" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="hsl(45, 95%, 55%)" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="hsl(45, 95%, 55%)" stopOpacity={0.05} />
+              </linearGradient>
+            </defs>
             <CartesianGrid 
               strokeDasharray="3 3" 
               stroke="hsl(var(--border))" 
@@ -99,45 +113,40 @@ export const RealtimeChart = ({ data }: RealtimeChartProps) => {
               tickFormatter={(value) => `${value}`}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend 
-              verticalAlign="bottom"
-              height={36}
-              iconType="circle"
-              formatter={(value) => (
-                <span className="text-xs text-muted-foreground">{value}</span>
-              )}
-            />
-            <Line
+            <Area
               yAxisId="left"
               type="monotone"
               dataKey="temperature"
               name="Nhiệt độ"
               stroke="hsl(12, 90%, 62%)"
               strokeWidth={2.5}
+              fill="url(#gradientTemperature)"
               dot={false}
               activeDot={{ r: 4, fill: "hsl(12, 90%, 62%)" }}
             />
-            <Line
+            <Area
               yAxisId="left"
               type="monotone"
               dataKey="humidity"
               name="Độ ẩm"
               stroke="hsl(200, 95%, 60%)"
               strokeWidth={2.5}
+              fill="url(#gradientHumidity)"
               dot={false}
               activeDot={{ r: 4, fill: "hsl(200, 95%, 60%)" }}
             />
-            <Line
+            <Area
               yAxisId="right"
               type="monotone"
               dataKey="light"
               name="Ánh sáng"
               stroke="hsl(45, 95%, 55%)"
               strokeWidth={2.5}
+              fill="url(#gradientLight)"
               dot={false}
               activeDot={{ r: 4, fill: "hsl(45, 95%, 55%)" }}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>
