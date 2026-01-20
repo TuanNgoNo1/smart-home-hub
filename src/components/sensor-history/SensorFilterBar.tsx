@@ -10,13 +10,7 @@ import { SensorDataFilters, SensorType } from "@/types/sensor";
 import { useState } from "react";
 
 // Time Picker Component
-const TimePickerButton = ({ 
-  value, 
-  onChange 
-}: { 
-  value: string; 
-  onChange: (time: string) => void;
-}) => {
+const TimePickerButton = ({ value, onChange }: { value: string; onChange: (time: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hours, minutes, seconds] = value.split(":").map(Number);
 
@@ -30,14 +24,14 @@ const TimePickerButton = ({
     onChange(formatted);
   };
 
-  const TimeColumn = ({ 
-    max, 
-    current, 
+  const TimeColumn = ({
+    max,
+    current,
     onSelect,
-    label 
-  }: { 
-    max: number; 
-    current: number; 
+    label,
+  }: {
+    max: number;
+    current: number;
     onSelect: (val: number) => void;
     label: string;
   }) => (
@@ -51,9 +45,7 @@ const TimePickerButton = ({
               onClick={() => onSelect(i)}
               className={cn(
                 "w-10 h-8 rounded-md text-sm font-medium transition-colors",
-                current === i
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-muted text-foreground"
+                current === i ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground",
               )}
             >
               {String(i).padStart(2, "0")}
@@ -67,48 +59,24 @@ const TimePickerButton = ({
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-8 px-3 text-sm font-mono"
-        >
+        <Button variant="outline" size="sm" className="h-8 px-3 text-sm font-mono">
           {value}
         </Button>
       </PopoverTrigger>
-      <PopoverContent 
-        className="w-auto p-3 bg-popover border border-border shadow-lg z-50" 
+      <PopoverContent
+        className="w-auto p-3 bg-popover border border-border shadow-lg z-50"
         align="start"
         sideOffset={4}
       >
         <div className="flex gap-2">
-          <TimeColumn
-            label="Giờ"
-            max={24}
-            current={hours}
-            onSelect={(val) => handleChange("hours", val)}
-          />
+          <TimeColumn label="Giờ" max={24} current={hours} onSelect={(val) => handleChange("hours", val)} />
           <div className="flex items-center justify-center text-muted-foreground pt-5">:</div>
-          <TimeColumn
-            label="Phút"
-            max={60}
-            current={minutes}
-            onSelect={(val) => handleChange("minutes", val)}
-          />
+          <TimeColumn label="Phút" max={60} current={minutes} onSelect={(val) => handleChange("minutes", val)} />
           <div className="flex items-center justify-center text-muted-foreground pt-5">:</div>
-          <TimeColumn
-            label="Giây"
-            max={60}
-            current={seconds}
-            onSelect={(val) => handleChange("seconds", val)}
-          />
+          <TimeColumn label="Giây" max={60} current={seconds} onSelect={(val) => handleChange("seconds", val)} />
         </div>
         <div className="mt-3 pt-3 border-t border-border flex justify-end">
-          <Button
-            variant="default"
-            size="sm"
-            onClick={() => setIsOpen(false)}
-            className="text-xs"
-          >
+          <Button variant="default" size="sm" onClick={() => setIsOpen(false)} className="text-xs">
             Đóng
           </Button>
         </div>
@@ -146,18 +114,12 @@ const quickTimeFilters = [
 ];
 
 export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProps) => {
-  const [fromDate, setFromDate] = useState<Date | undefined>(
-    filters.fromDate ? new Date(filters.fromDate) : undefined
-  );
-  const [toDate, setToDate] = useState<Date | undefined>(
-    filters.toDate ? new Date(filters.toDate) : undefined
-  );
+  const [fromDate, setFromDate] = useState<Date | undefined>(filters.fromDate ? new Date(filters.fromDate) : undefined);
+  const [toDate, setToDate] = useState<Date | undefined>(filters.toDate ? new Date(filters.toDate) : undefined);
   const [fromTime, setFromTime] = useState(
-    filters.fromDate ? format(new Date(filters.fromDate), "HH:mm:ss") : "00:00:00"
+    filters.fromDate ? format(new Date(filters.fromDate), "HH:mm:ss") : "00:00:00",
   );
-  const [toTime, setToTime] = useState(
-    filters.toDate ? format(new Date(filters.toDate), "HH:mm:ss") : "23:59:59"
-  );
+  const [toTime, setToTime] = useState(filters.toDate ? format(new Date(filters.toDate), "HH:mm:ss") : "23:59:59");
   const [activeQuickFilter, setActiveQuickFilter] = useState<string | null>(null);
 
   const handleFromDateChange = (date: Date | undefined) => {
@@ -322,12 +284,9 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
               <Button
                 variant="outline"
                 size="sm"
-                className={cn(
-                  "h-8 px-3 text-sm font-normal",
-                  !fromDate && "text-muted-foreground"
-                )}
+                className={cn("h-8 px-3 text-sm font-normal", !fromDate && "text-muted-foreground")}
               >
-                {fromDate ? format(fromDate, "dd/MM/yyyy") : "Chọn ngày"}
+                {fromDate ? format(fromDate, "dd/MM/yyyy") : "Ngày"}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
@@ -351,12 +310,9 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
               <Button
                 variant="outline"
                 size="sm"
-                className={cn(
-                  "h-8 px-3 text-sm font-normal",
-                  !toDate && "text-muted-foreground"
-                )}
+                className={cn("h-8 px-3 text-sm font-normal", !toDate && "text-muted-foreground")}
               >
-                {toDate ? format(toDate, "dd/MM/yyyy") : "Chọn ngày"}
+                {toDate ? format(toDate, "dd/MM/yyyy") : "Ngày"}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0 bg-popover border border-border shadow-lg z-50" align="start">
