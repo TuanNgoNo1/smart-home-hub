@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Power, Loader2, Check, X, Lightbulb, Fan, Snowflake } from "lucide-react";
+import { Power, Lightbulb, Fan, Snowflake } from "lucide-react";
 
 interface ActionDataTableProps {
   data: ActionRecord[];
@@ -38,21 +38,18 @@ const actionConfig: Record<ActionType, { label: string; colorClass: string }> = 
   off: { label: "TẮT", colorClass: "text-muted-foreground" },
 };
 
-const statusConfig: Record<ActionStatus, { label: string; badgeClass: string; icon: React.ReactNode }> = {
+const statusConfig: Record<ActionStatus, { label: string; badgeClass: string }> = {
   waiting: {
     label: "Đang xử lý",
-    badgeClass: "bg-amber-100 text-amber-700 border-amber-200",
-    icon: <Loader2 className="w-3 h-3 animate-spin" />,
+    badgeClass: "bg-amber-50 text-amber-600 border-amber-300",
   },
   success: {
     label: "Thành công",
-    badgeClass: "bg-emerald-100 text-emerald-700 border-emerald-200",
-    icon: <Check className="w-3 h-3" />,
+    badgeClass: "bg-emerald-50 text-emerald-600 border-emerald-300",
   },
   failed: {
     label: "Lỗi/Timeout",
-    badgeClass: "bg-red-100 text-red-700 border-red-200",
-    icon: <X className="w-3 h-3" />,
+    badgeClass: "bg-red-50 text-red-600 border-red-300",
   },
 };
 
@@ -134,9 +131,8 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
                 <TableCell>
                   <Badge
                     variant="outline"
-                    className={cn("font-medium gap-1.5 text-xs", status.badgeClass)}
+                    className={cn("font-medium text-xs rounded-full px-3 py-1", status.badgeClass)}
                   >
-                    {status.icon}
                     {status.label}
                   </Badge>
                 </TableCell>
