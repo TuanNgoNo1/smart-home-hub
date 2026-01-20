@@ -77,7 +77,7 @@ const Index = () => {
         </section>
 
         {/* Chart + Notifications Section */}
-        <section className="grid grid-cols-1 xl:grid-cols-[1fr_320px] gap-4">
+        <section className="grid grid-cols-1 xl:grid-cols-[70%_30%] gap-4">
           <RealtimeChart data={chartData} />
           <NotificationPanel 
             notifications={notifications} 
