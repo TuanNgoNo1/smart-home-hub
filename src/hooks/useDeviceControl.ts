@@ -9,6 +9,15 @@ interface DeviceStates {
   ac: DeviceState;
 }
 
+export interface DeviceNotification {
+  id: string;
+  type: "success" | "pending" | "error";
+  title: string;
+  subtitle: string;
+  device: string;
+  timestamp: Date;
+}
+
 const STORAGE_KEY = "iot_device_states";
 const ACK_TIMEOUT = 10000; // 10 seconds
 
@@ -46,10 +55,31 @@ export const useDeviceControl = () => {
     return { light: "off", fan: "off", ac: "off" };
   });
 
+  const [notifications, setNotifications] = useState<DeviceNotification[]>([]);
+
   // Save to localStorage whenever states change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(deviceStates));
   }, [deviceStates]);
+
+  const addNotification = useCallback((notification: Omit<DeviceNotification, "id" | "timestamp">) => {
+    const newNotification: DeviceNotification = {
+      ...notification,
+      id: Date.now().toString(),
+      timestamp: new Date(),
+    };
+    setNotifications(prev => [newNotification, ...prev].slice(0, 50)); // Keep last 50
+  }, []);
+
+  const updateNotification = useCallback((id: string, updates: Partial<DeviceNotification>) => {
+    setNotifications(prev => 
+      prev.map(n => n.id === id ? { ...n, ...updates, timestamp: new Date() } : n)
+    );
+  }, []);
+
+  const clearNotifications = useCallback(() => {
+    setNotifications([]);
+  }, []);
 
   const toggleDevice = useCallback(async (device: keyof DeviceStates) => {
     const currentState = deviceStates[device];
@@ -68,6 +98,15 @@ export const useDeviceControl = () => {
       ac: "Điều hòa",
     };
 
+    // Add pending notification
+    const pendingId = Date.now().toString();
+    addNotification({
+      type: "pending",
+      title: `Gửi lệnh ${targetState === "on" ? "bật" : "tắt"} ${deviceNames[device]}`,
+      subtitle: "Đang chờ phản hồi...",
+      device: device,
+    });
+
     try {
       // Create a timeout promise
       const timeoutPromise = new Promise<boolean>((_, reject) => {
@@ -82,6 +121,15 @@ export const useDeviceControl = () => {
 
       if (success) {
         setDeviceStates(prev => ({ ...prev, [device]: targetState }));
+        
+        // Add success notification
+        addNotification({
+          type: "success",
+          title: `${deviceNames[device]} ${targetState === "on" ? "bật" : "tắt"} OK`,
+          subtitle: "ACK received",
+          device: device,
+        });
+
         toast({
           title: "Thành công",
           description: `${deviceNames[device]} đã ${targetState === "on" ? "bật" : "tắt"}`,
@@ -91,16 +139,27 @@ export const useDeviceControl = () => {
       }
     } catch (error) {
       setDeviceStates(prev => ({ ...prev, [device]: "failed" }));
+      
+      // Add error notification
+      addNotification({
+        type: "error",
+        title: `Lỗi ${deviceNames[device]}`,
+        subtitle: "Không nhận được tín hiệu",
+        device: device,
+      });
+
       toast({
         variant: "destructive",
         title: "Lỗi kết nối",
         description: `Không nhận được tín hiệu từ ${deviceNames[device]}. Vui lòng thử lại.`,
       });
     }
-  }, [deviceStates]);
+  }, [deviceStates, addNotification]);
 
   return {
     deviceStates,
     toggleDevice,
+    notifications,
+    clearNotifications,
   };
 };
