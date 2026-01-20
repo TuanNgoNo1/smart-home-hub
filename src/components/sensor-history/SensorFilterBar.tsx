@@ -1,4 +1,4 @@
-import { Search, Filter, ArrowUpDown, Clock, Calendar } from "lucide-react";
+import { Search, Filter, ArrowUpDown, Clock, Calendar, RotateCcw } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -103,8 +103,6 @@ const sensorTypeOptions: {
 const sortOptions = [
   { value: "timestamp-desc", label: "Mới nhất" },
   { value: "timestamp-asc", label: "Cũ nhất" },
-  { value: "value-desc", label: "Giá trị cao → thấp" },
-  { value: "value-asc", label: "Giá trị thấp → cao" },
 ];
 
 const quickTimeFilters = [
@@ -253,6 +251,31 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
             </SelectContent>
           </Select>
         </div>
+
+        {/* Reset Filter */}
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-9 px-3 gap-2"
+          onClick={() => {
+            setFromDate(undefined);
+            setToDate(undefined);
+            setFromTime("00:00:00");
+            setToTime("23:59:59");
+            setActiveQuickFilter(null);
+            onFilterChange({
+              search: "",
+              sensorType: "all",
+              sortBy: "timestamp",
+              sortOrder: "desc",
+              fromDate: "",
+              toDate: "",
+            });
+          }}
+        >
+          <RotateCcw className="w-4 h-4" />
+          Reset
+        </Button>
       </div>
 
       {/* Row 2: Quick Filters + Date/Time Range */}
