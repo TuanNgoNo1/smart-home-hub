@@ -39,7 +39,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const RealtimeChart = ({ data }: RealtimeChartProps) => {
   return (
-    <div className="chart-container">
+    <div className="chart-container h-[400px] flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-lg font-semibold text-foreground">Biểu đồ thời gian thực</h2>
@@ -61,7 +61,7 @@ export const RealtimeChart = ({ data }: RealtimeChartProps) => {
         </div>
       </div>
 
-      <div className="h-[300px] w-full">
+      <div className="flex-1 w-full min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
