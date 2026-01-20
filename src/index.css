@@ -7,12 +7,14 @@
 @layer base {
   :root {
     --background: 210 40% 94%;
-    --background-gradient: linear-gradient(135deg, 
-      hsl(210, 60%, 95%) 0%, 
-      hsl(200, 70%, 90%) 25%, 
-      hsl(220, 65%, 92%) 50%, 
-      hsl(190, 60%, 88%) 75%, 
-      hsl(230, 55%, 94%) 100%
+    --background-gradient: linear-gradient(
+      -45deg, 
+      hsl(210, 60%, 95%), 
+      hsl(200, 70%, 90%), 
+      hsl(220, 65%, 92%), 
+      hsl(190, 60%, 88%), 
+      hsl(230, 55%, 94%),
+      hsl(200, 65%, 91%)
     );
     --foreground: 220 25% 10%;
 
@@ -124,8 +126,21 @@
     @apply text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
     background: var(--background-gradient);
-    background-attachment: fixed;
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
     min-height: 100vh;
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .font-mono {
