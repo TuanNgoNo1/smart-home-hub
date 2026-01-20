@@ -10,39 +10,7 @@ import { useDeviceControl } from "@/hooks/useDeviceControl";
 const Index = () => {
   const [isConnected] = useState(true);
   const { sensorData, chartData } = useSensorData();
-  const { deviceStates, toggleDevice } = useDeviceControl();
-
-  // Mock notifications
-  const [notifications, setNotifications] = useState([
-    {
-      id: "1",
-      type: "success" as const,
-      title: "Điều hòa bật OK",
-      subtitle: "ACK received",
-      device: "device",
-      timestamp: new Date(Date.now() - 60000),
-    },
-    {
-      id: "2",
-      type: "pending" as const,
-      title: "Gửi lệnh bật Điều hòa",
-      subtitle: "Đang chờ...",
-      device: "device",
-      timestamp: new Date(Date.now() - 60000),
-    },
-    {
-      id: "3",
-      type: "success" as const,
-      title: "Quạt bật OK",
-      subtitle: "ACK received",
-      device: "device",
-      timestamp: new Date(Date.now() - 90000),
-    },
-  ]);
-
-  const handleClearNotifications = () => {
-    setNotifications([]);
-  };
+  const { deviceStates, toggleDevice, notifications, clearNotifications } = useDeviceControl();
 
   return (
     <div className="min-h-screen">
@@ -81,7 +49,7 @@ const Index = () => {
           <RealtimeChart data={chartData} />
           <NotificationPanel 
             notifications={notifications} 
-            onClear={handleClearNotifications} 
+            onClear={clearNotifications} 
           />
         </section>
 
