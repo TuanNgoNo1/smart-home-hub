@@ -11,17 +11,26 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Power, Loader2, Check, X } from "lucide-react";
+import { Power, Loader2, Check, X, Lightbulb, Fan, Snowflake } from "lucide-react";
 
 interface ActionDataTableProps {
   data: ActionRecord[];
   isLoading: boolean;
 }
 
-const deviceConfig: Record<DeviceType, { label: string; icon: string }> = {
-  light: { label: "Đèn", icon: "💡" },
-  fan: { label: "Quạt", icon: "🌀" },
-  ac: { label: "Điều hòa", icon: "❄️" },
+const deviceConfig: Record<DeviceType, { label: string; icon: React.ReactNode }> = {
+  light: { 
+    label: "Đèn", 
+    icon: <Lightbulb className="w-5 h-5 text-amber-500" /> 
+  },
+  fan: { 
+    label: "Quạt", 
+    icon: <Fan className="w-5 h-5 text-blue-500" /> 
+  },
+  ac: { 
+    label: "Điều hòa", 
+    icon: <Snowflake className="w-5 h-5 text-cyan-500" /> 
+  },
 };
 
 const actionConfig: Record<ActionType, { label: string; colorClass: string }> = {
@@ -32,17 +41,17 @@ const actionConfig: Record<ActionType, { label: string; colorClass: string }> = 
 const statusConfig: Record<ActionStatus, { label: string; badgeClass: string; icon: React.ReactNode }> = {
   waiting: {
     label: "Đang xử lý",
-    badgeClass: "bg-amber-100 text-amber-700 border-amber-300",
+    badgeClass: "bg-amber-100 text-amber-700 border-amber-200",
     icon: <Loader2 className="w-3 h-3 animate-spin" />,
   },
   success: {
     label: "Thành công",
-    badgeClass: "bg-emerald-100 text-emerald-700 border-emerald-300",
+    badgeClass: "bg-emerald-100 text-emerald-700 border-emerald-200",
     icon: <Check className="w-3 h-3" />,
   },
   failed: {
     label: "Lỗi/Timeout",
-    badgeClass: "bg-red-100 text-red-700 border-red-300",
+    badgeClass: "bg-red-100 text-red-700 border-red-200",
     icon: <X className="w-3 h-3" />,
   },
 };
@@ -53,22 +62,22 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
       <div className="bg-card rounded-xl border border-border overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/50">
-              <TableHead className="w-[100px]">ID</TableHead>
+            <TableRow className="bg-muted/30">
+              <TableHead className="w-[140px]">ID</TableHead>
               <TableHead className="w-[140px]">Thiết bị</TableHead>
               <TableHead className="w-[100px]">Action</TableHead>
-              <TableHead className="w-[150px]">Status</TableHead>
+              <TableHead className="w-[130px]">Status</TableHead>
               <TableHead>Thời gian</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {Array.from({ length: 5 }).map((_, i) => (
+            {Array.from({ length: 10 }).map((_, i) => (
               <TableRow key={i}>
-                <TableCell><Skeleton className="h-4 w-16" /></TableCell>
                 <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                <TableCell><Skeleton className="h-4 w-16" /></TableCell>
-                <TableCell><Skeleton className="h-6 w-28" /></TableCell>
-                <TableCell><Skeleton className="h-4 w-40" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-20" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-12" /></TableCell>
+                <TableCell><Skeleton className="h-6 w-24" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-36" /></TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -89,12 +98,12 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
     <div className="bg-card rounded-xl border border-border overflow-hidden">
       <Table>
         <TableHeader>
-          <TableRow className="bg-muted/50 hover:bg-muted/50">
-            <TableHead className="w-[100px] font-semibold hidden sm:table-cell">ID</TableHead>
-            <TableHead className="w-[140px] font-semibold">Thiết bị</TableHead>
-            <TableHead className="w-[100px] font-semibold">Action</TableHead>
-            <TableHead className="w-[150px] font-semibold">Status</TableHead>
-            <TableHead className="font-semibold">Thời gian</TableHead>
+          <TableRow className="bg-muted/30 hover:bg-muted/30">
+            <TableHead className="w-[140px] font-medium text-muted-foreground">ID</TableHead>
+            <TableHead className="w-[140px] font-medium text-muted-foreground">Thiết bị</TableHead>
+            <TableHead className="w-[100px] font-medium text-muted-foreground">Action</TableHead>
+            <TableHead className="w-[130px] font-medium text-muted-foreground">Status</TableHead>
+            <TableHead className="font-medium text-muted-foreground">Thời gian</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -104,13 +113,15 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
             const status = statusConfig[record.status];
             
             return (
-              <TableRow key={record.id} className="hover:bg-muted/30 transition-colors">
-                <TableCell className="font-mono text-xs text-muted-foreground hidden sm:table-cell">
+              <TableRow key={record.id} className="hover:bg-muted/30 transition-colors border-b border-border/50">
+                <TableCell className="font-mono text-xs text-muted-foreground">
                   {record.id}
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <span className="text-lg">{device.icon}</span>
+                    <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center">
+                      {device.icon}
+                    </div>
                     <span className="font-medium">{device.label}</span>
                   </div>
                 </TableCell>
@@ -123,13 +134,13 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
                 <TableCell>
                   <Badge
                     variant="outline"
-                    className={cn("font-medium gap-1.5", status.badgeClass)}
+                    className={cn("font-medium gap-1.5 text-xs", status.badgeClass)}
                   >
                     {status.icon}
                     {status.label}
                   </Badge>
                 </TableCell>
-                <TableCell className="font-mono text-sm">
+                <TableCell className="font-mono text-sm text-muted-foreground">
                   {format(new Date(record.timestamp), "yyyy-MM-dd HH:mm:ss")}
                 </TableCell>
               </TableRow>
