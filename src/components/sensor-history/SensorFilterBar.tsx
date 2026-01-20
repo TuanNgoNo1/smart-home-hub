@@ -94,7 +94,7 @@ const sensorTypeOptions: {
   value: SensorType | "all";
   label: string;
 }[] = [
-  { value: "all", label: "Tất cả" },
+  { value: "all", label: "Cảm biến" },
   { value: "temperature", label: "Nhiệt độ" },
   { value: "humidity", label: "Độ ẩm" },
   { value: "light", label: "Ánh sáng" },
