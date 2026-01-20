@@ -1,4 +1,4 @@
-import { Search, Filter, ArrowUpDown, Lightbulb, Fan, Snowflake, Calendar } from "lucide-react";
+import { Search, ArrowUpDown, Lightbulb, Fan, Snowflake, Calendar, RotateCcw } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -127,7 +127,7 @@ const deviceTypeOptions: {
   label: string;
   icon: React.ReactNode;
 }[] = [
-  { value: "all", label: "Tất cả", icon: <Filter className="w-4 h-4" /> },
+  { value: "all", label: "Tất cả", icon: null },
   { value: "light", label: "Đèn", icon: <Lightbulb className="w-4 h-4 text-amber-500" /> },
   { value: "fan", label: "Quạt", icon: <Fan className="w-4 h-4 text-blue-500" /> },
   { value: "ac", label: "Điều hòa", icon: <Snowflake className="w-4 h-4 text-cyan-500" /> },
@@ -221,7 +221,6 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
 
         {/* Device Type Filter */}
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-muted-foreground" />
           <Select
             value={filters.deviceType}
             onValueChange={(value) => onFilterChange({ deviceType: value as DeviceType | "all" })}
@@ -233,7 +232,7 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
               {deviceTypeOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   <span className="flex items-center gap-2">
-                    {option.icon}
+                    {option.icon && option.icon}
                     <span>{option.label}</span>
                   </span>
                 </SelectItem>
@@ -278,6 +277,30 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
             </SelectContent>
           </Select>
         </div>
+
+        {/* Reset Filter */}
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-9 px-3 gap-2"
+          onClick={() => {
+            setFromDate(undefined);
+            setToDate(undefined);
+            setFromTime("00:00:00");
+            setToTime("23:59:59");
+            onFilterChange({
+              search: "",
+              deviceType: "all",
+              status: "all",
+              sortOrder: "desc",
+              fromDate: "",
+              toDate: "",
+            });
+          }}
+        >
+          <RotateCcw className="w-4 h-4" />
+          Reset
+        </Button>
       </div>
 
       {/* Row 2: Date/Time Range */}
