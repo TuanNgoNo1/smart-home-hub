@@ -95,7 +95,7 @@ const Profile = () => {
           </Card>
 
           {/* Important Links */}
-          <Card>
+          <Card className="shadow-lg">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-base font-semibold">
                 <ExternalLink className="w-5 h-5 text-primary" />
@@ -156,7 +156,7 @@ const Profile = () => {
           </Card>
 
           {/* Tech Stack */}
-          <Card>
+          <Card className="shadow-lg">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-base font-semibold">
                 <Cpu className="w-5 h-5 text-primary" />

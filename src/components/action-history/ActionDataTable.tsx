@@ -56,7 +56,7 @@ const statusConfig: Record<ActionStatus, { label: string; badgeClass: string }> 
 export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
   if (isLoading) {
     return (
-      <div className="bg-card rounded-xl border border-border overflow-hidden">
+      <div className="bg-card rounded-xl border border-border overflow-hidden shadow-lg">
         <Table className="table-fixed w-full">
           <TableHeader>
             <TableRow className="bg-muted/30">
@@ -85,14 +85,14 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
 
   if (data.length === 0) {
     return (
-      <div className="bg-card rounded-xl border border-border p-12 text-center">
+      <div className="bg-card rounded-xl border border-border p-12 text-center shadow-lg">
         <p className="text-muted-foreground">Không có dữ liệu phù hợp với bộ lọc</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-card rounded-xl border border-border overflow-hidden">
+    <div className="bg-card rounded-xl border border-border overflow-hidden shadow-lg">
       <Table className="table-fixed w-full">
         <TableHeader>
           <TableRow className="bg-muted/30 hover:bg-muted/30">
