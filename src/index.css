@@ -151,8 +151,16 @@
     @apply border-border;
   }
 
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    @apply text-foreground antialiased;
+    @apply text-foreground antialiased bg-background;
     font-family: 'Inter', system-ui, sans-serif;
     background: var(--background-gradient);
     min-height: 100vh;
