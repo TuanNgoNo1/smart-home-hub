@@ -1,5 +1,4 @@
 import { Home, Wifi, WifiOff } from "lucide-react";
-import { SettingsDropdown } from "./SettingsDropdown";
 
 interface HeaderProps {
   isConnected: boolean;
@@ -20,22 +19,18 @@ export const Header = ({ isConnected }: HeaderProps) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className={`status-badge ${isConnected ? 'status-badge-success' : 'status-badge-error'}`}>
-              {isConnected ? (
-                <>
-                  <Wifi className="w-3.5 h-3.5" />
-                  <span>Connected</span>
-                </>
-              ) : (
-                <>
-                  <WifiOff className="w-3.5 h-3.5" />
-                  <span>Disconnected</span>
-                </>
-              )}
-            </div>
-            
-            <SettingsDropdown />
+          <div className={`status-badge ${isConnected ? 'status-badge-success' : 'status-badge-error'}`}>
+            {isConnected ? (
+              <>
+                <Wifi className="w-3.5 h-3.5" />
+                <span>Connected</span>
+              </>
+            ) : (
+              <>
+                <WifiOff className="w-3.5 h-3.5" />
+                <span>Disconnected</span>
+              </>
+            )}
           </div>
         </div>
       </div>
