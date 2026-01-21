@@ -6,38 +6,38 @@
 
 @layer base {
   :root {
-    --background: 220 10% 96%;
+    --background: 215 25% 95%;
     --background-gradient: 
-      radial-gradient(ellipse 80% 50% at 20% 30%, hsla(0, 80%, 65%, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 80% 20%, hsla(210, 90%, 60%, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 50% at 70% 80%, hsla(48, 100%, 55%, 0.08) 0%, transparent 50%),
-      linear-gradient(180deg, hsl(220, 15%, 97%) 0%, hsl(220, 10%, 94%) 50%, hsl(220, 12%, 96%) 100%);
-    --foreground: 220 25% 10%;
+      radial-gradient(ellipse 80% 50% at 20% 30%, hsla(0, 80%, 65%, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 20%, hsla(210, 90%, 60%, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 50% at 70% 80%, hsla(48, 100%, 55%, 0.06) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(215, 25%, 96%) 0%, hsl(215, 20%, 93%) 50%, hsl(215, 22%, 95%) 100%);
+    --foreground: 215 30% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card-foreground: 215 30% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover-foreground: 215 30% 10%;
 
-    --primary: 220 70% 50%;
+    --primary: 215 70% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 94%;
-    --secondary-foreground: 220 25% 25%;
+    --secondary: 215 20% 94%;
+    --secondary-foreground: 215 25% 25%;
 
-    --muted: 220 15% 92%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 215 18% 92%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 220 20% 96%;
-    --accent-foreground: 220 25% 15%;
+    --accent: 215 22% 96%;
+    --accent-foreground: 215 25% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 220 70% 50%;
+    --border: 215 18% 88%;
+    --input: 215 18% 88%;
+    --ring: 215 70% 50%;
 
     --radius: 0.75rem;
 
@@ -72,14 +72,14 @@
     --shadow-glow-cool: 0 0 25px hsl(210, 95%, 58%, 0.4);
     --shadow-glow-light: 0 0 25px hsl(48, 100%, 50%, 0.5);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-background: 215 20% 98%;
+    --sidebar-foreground: 215 20% 26%;
+    --sidebar-primary: 215 25% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 215 18% 96%;
+    --sidebar-accent-foreground: 215 25% 10%;
+    --sidebar-border: 215 15% 90%;
+    --sidebar-ring: 215 70% 50%;
   }
 
   .dark {
