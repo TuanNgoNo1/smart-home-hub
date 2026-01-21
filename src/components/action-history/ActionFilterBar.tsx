@@ -1,4 +1,4 @@
-import { Search, ArrowUpDown, Lightbulb, Fan, Snowflake, Calendar, RotateCcw } from "lucide-react";
+import { Search, ArrowUpDown, Lightbulb, Fan, Snowflake, Calendar, RotateCcw, CheckCircle2, Clock, XCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -104,11 +104,12 @@ const deviceTypeOptions: {
 const statusOptions: {
   value: ActionStatus | "all";
   label: string;
+  icon: React.ReactNode;
 }[] = [
-  { value: "all", label: "Trạng thái" },
-  { value: "success", label: "Thành công" },
-  { value: "waiting", label: "Đang xử lý" },
-  { value: "failed", label: "Lỗi" },
+  { value: "all", label: "Trạng thái", icon: null },
+  { value: "success", label: "Thành công", icon: <CheckCircle2 className="w-4 h-4 text-emerald-500" /> },
+  { value: "waiting", label: "Đang xử lý", icon: <Clock className="w-4 h-4 text-amber-500" /> },
+  { value: "failed", label: "Lỗi", icon: <XCircle className="w-4 h-4 text-red-500" /> },
 ];
 
 const sortOptions = [
@@ -214,7 +215,10 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
           <SelectContent className="bg-popover border border-border shadow-lg z-50">
             {statusOptions.map((option) => (
               <SelectItem key={option.value} value={option.value}>
-                {option.label}
+                <span className="flex items-center gap-2">
+                  {option.icon && option.icon}
+                  <span>{option.label}</span>
+                </span>
               </SelectItem>
             ))}
           </SelectContent>
