@@ -202,7 +202,7 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
   const currentSort = `${filters.sortBy}-${filters.sortOrder}`;
 
   return (
-    <div className="bg-card rounded-xl border border-border p-4 space-y-4">
+    <div className="bg-card rounded-xl border border-border p-4 space-y-4 shadow-lg">
       {/* Row 1: Search + Filters */}
       <div className="flex flex-col lg:flex-row gap-4">
         {/* Search Input */}
