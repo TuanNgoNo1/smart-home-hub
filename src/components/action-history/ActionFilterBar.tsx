@@ -96,7 +96,7 @@ const deviceTypeOptions: {
   icon: React.ReactNode;
 }[] = [
   { value: "all", label: "Thiết bị", icon: null },
-  { value: "light", label: "Đèn", icon: <Lightbulb className="w-4 h-4 text-amber-500" /> },
+  { value: "light", label: "Đèn", icon: <Lightbulb className="w-4 h-4 text-yellow-500" /> },
   { value: "fan", label: "Quạt", icon: <Fan className="w-4 h-4 text-blue-500" /> },
   { value: "ac", label: "Điều hòa", icon: <Snowflake className="w-4 h-4 text-cyan-500" /> },
 ];
