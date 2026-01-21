@@ -57,14 +57,14 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
   if (isLoading) {
     return (
       <div className="bg-card rounded-xl border border-border overflow-hidden">
-        <Table>
+        <Table className="table-fixed w-full">
           <TableHeader>
             <TableRow className="bg-muted/30">
-              <TableHead className="w-[140px]">ID</TableHead>
-              <TableHead className="w-[140px]">Thiết bị</TableHead>
-              <TableHead className="w-[100px]">Action</TableHead>
-              <TableHead className="w-[130px]">Status</TableHead>
-              <TableHead>Thời gian</TableHead>
+              <TableHead className="w-1/5">ID</TableHead>
+              <TableHead className="w-1/5">Thiết bị</TableHead>
+              <TableHead className="w-1/5">Action</TableHead>
+              <TableHead className="w-1/5">Status</TableHead>
+              <TableHead className="w-1/5">Thời gian</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -93,14 +93,14 @@ export const ActionDataTable = ({ data, isLoading }: ActionDataTableProps) => {
 
   return (
     <div className="bg-card rounded-xl border border-border overflow-hidden">
-      <Table>
+      <Table className="table-fixed w-full">
         <TableHeader>
           <TableRow className="bg-muted/30 hover:bg-muted/30">
-            <TableHead className="w-[140px] font-medium text-muted-foreground">ID</TableHead>
-            <TableHead className="w-[140px] font-medium text-muted-foreground">Thiết bị</TableHead>
-            <TableHead className="w-[100px] font-medium text-muted-foreground">Action</TableHead>
-            <TableHead className="w-[130px] font-medium text-muted-foreground">Status</TableHead>
-            <TableHead className="font-medium text-muted-foreground">Thời gian</TableHead>
+            <TableHead className="w-1/5 font-medium text-muted-foreground">ID</TableHead>
+            <TableHead className="w-1/5 font-medium text-muted-foreground">Thiết bị</TableHead>
+            <TableHead className="w-1/5 font-medium text-muted-foreground">Action</TableHead>
+            <TableHead className="w-1/5 font-medium text-muted-foreground">Status</TableHead>
+            <TableHead className="w-1/5 font-medium text-muted-foreground">Thời gian</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

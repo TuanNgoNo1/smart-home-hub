@@ -57,13 +57,13 @@ export const SensorDataTable = ({
   if (isLoading) {
     return (
       <div className="bg-card rounded-xl border border-border overflow-hidden">
-        <Table>
+        <Table className="table-fixed w-full">
           <TableHeader>
             <TableRow className="bg-muted/50">
-              <TableHead className="w-[80px]">ID</TableHead>
-              <TableHead className="w-[120px]">Loại cảm biến</TableHead>
-              <TableHead className="w-[100px]">Giá trị</TableHead>
-              <TableHead>Thời gian</TableHead>
+              <TableHead className="w-1/4">ID</TableHead>
+              <TableHead className="w-1/4">Loại cảm biến</TableHead>
+              <TableHead className="w-1/4">Giá trị</TableHead>
+              <TableHead className="w-1/4">Thời gian</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -91,12 +91,12 @@ export const SensorDataTable = ({
 
   return (
     <div className="bg-card rounded-xl border border-border overflow-hidden">
-      <Table>
+      <Table className="table-fixed w-full">
         <TableHeader>
           <TableRow className="bg-muted/30 hover:bg-muted/30">
-            <TableHead className="w-[80px] font-medium text-muted-foreground">ID</TableHead>
-            <TableHead className="w-[120px] font-medium text-muted-foreground">Loại cảm biến</TableHead>
-            <TableHead className="w-[100px] font-medium text-muted-foreground">Giá trị</TableHead>
+            <TableHead className="w-1/4 font-medium text-muted-foreground">ID</TableHead>
+            <TableHead className="w-1/4 font-medium text-muted-foreground">Loại cảm biến</TableHead>
+            <TableHead className="w-1/4 font-medium text-muted-foreground">Giá trị</TableHead>
             <TableHead
               className={cn(
                 "font-medium text-muted-foreground",
