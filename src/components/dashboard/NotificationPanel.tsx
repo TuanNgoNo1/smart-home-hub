@@ -70,7 +70,7 @@ export const NotificationPanel = ({ notifications, onClear }: NotificationPanelP
   const deviceCount = notifications.filter(n => n.device).length;
 
   return (
-    <div className="bg-card rounded-2xl border border-border p-4 h-[400px] flex flex-col">
+    <div className="bg-card rounded-2xl border border-border p-4 h-[400px] flex flex-col shadow-lg">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -127,40 +127,50 @@ export const NotificationPanel = ({ notifications, onClear }: NotificationPanelP
 
       {/* Notifications List */}
       <ScrollArea className="flex-1 -mx-2 px-2">
-        <div className="space-y-2 pr-2">
-          {notifications.map((notification) => (
-            <div
-              key={notification.id}
-              className="flex items-start gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
-            >
-              <div className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
-                getIconBg(notification.type)
-              )}>
-                {getIcon(notification.type)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-sm text-foreground truncate">
-                    {notification.title}
-                  </span>
-                  {notification.device && (
-                    <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full" />
-                      device
-                    </span>
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground truncate">
-                  {notification.subtitle}
-                </p>
-                <p className="text-[10px] text-muted-foreground/70 mt-0.5">
-                  {formatTime(notification.timestamp)} • {getTimeAgo(notification.timestamp)}
-                </p>
-              </div>
+        {notifications.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full py-8 text-center">
+            <div className="w-16 h-16 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+              <Bell className="w-8 h-8 text-muted-foreground/50" />
             </div>
-          ))}
-        </div>
+            <p className="text-sm font-medium text-muted-foreground">Chưa có thông báo</p>
+            <p className="text-xs text-muted-foreground/70 mt-1">Các hoạt động sẽ hiển thị tại đây</p>
+          </div>
+        ) : (
+          <div className="space-y-2 pr-2">
+            {notifications.map((notification) => (
+              <div
+                key={notification.id}
+                className="flex items-start gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+              >
+                <div className={cn(
+                  "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
+                  getIconBg(notification.type)
+                )}>
+                  {getIcon(notification.type)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium text-sm text-foreground truncate">
+                      {notification.title}
+                    </span>
+                    {notification.device && (
+                      <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full" />
+                        device
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground truncate">
+                    {notification.subtitle}
+                  </p>
+                  <p className="text-[10px] text-muted-foreground/70 mt-0.5">
+                    {formatTime(notification.timestamp)} • {getTimeAgo(notification.timestamp)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </ScrollArea>
     </div>
   );

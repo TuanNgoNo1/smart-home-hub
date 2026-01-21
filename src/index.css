@@ -68,13 +68,13 @@
     --chart-humidity: hsl(200, 95%, 60%);
     --chart-light: hsl(45, 95%, 55%);
 
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-    --shadow-glow-warm: 0 0 20px hsl(12, 90%, 62%, 0.3);
-    --shadow-glow-cool: 0 0 20px hsl(200, 95%, 60%, 0.3);
-    --shadow-glow-light: 0 0 20px hsl(45, 95%, 55%, 0.4);
+    /* Shadows - Increased for better depth */
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+    --shadow-md: 0 4px 8px -1px rgb(0 0 0 / 0.12), 0 2px 6px -2px rgb(0 0 0 / 0.08);
+    --shadow-lg: 0 12px 20px -4px rgb(0 0 0 / 0.15), 0 6px 10px -4px rgb(0 0 0 / 0.08);
+    --shadow-glow-warm: 0 0 25px hsl(12, 90%, 62%, 0.4);
+    --shadow-glow-cool: 0 0 25px hsl(200, 95%, 60%, 0.4);
+    --shadow-glow-light: 0 0 25px hsl(45, 95%, 55%, 0.5);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

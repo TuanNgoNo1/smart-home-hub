@@ -38,8 +38,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export const RealtimeChart = ({ data }: RealtimeChartProps) => {
+  const isEmpty = !data || data.length === 0;
+
   return (
-    <div className="chart-container h-[400px] flex flex-col">
+    <div className="chart-container h-[400px] flex flex-col shadow-lg">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-lg font-semibold text-foreground">Biểu đồ thời gian thực</h2>
@@ -61,9 +63,20 @@ export const RealtimeChart = ({ data }: RealtimeChartProps) => {
         </div>
       </div>
 
-      <div className="flex-1 w-full min-h-0">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
+      {isEmpty ? (
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+            <svg className="w-10 h-10 text-muted-foreground/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+          </div>
+          <p className="text-sm font-medium text-muted-foreground">Đang chờ dữ liệu...</p>
+          <p className="text-xs text-muted-foreground/70 mt-1">Biểu đồ sẽ hiển thị khi có dữ liệu cảm biến</p>
+        </div>
+      ) : (
+        <div className="flex-1 w-full min-h-0">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
             data={data}
             margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
           >
@@ -148,7 +161,8 @@ export const RealtimeChart = ({ data }: RealtimeChartProps) => {
             />
           </AreaChart>
         </ResponsiveContainer>
-      </div>
+        </div>
+      )}
     </div>
   );
 };
