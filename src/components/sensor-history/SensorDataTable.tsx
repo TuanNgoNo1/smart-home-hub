@@ -28,17 +28,17 @@ const sensorConfig: Record<
   temperature: {
     label: "Nhiệt độ",
     unit: "°C",
-    badgeClass: "bg-orange-100 text-orange-600 border-orange-200",
+    badgeClass: "bg-orange-500/20 text-orange-700 border-orange-400/50 font-semibold",
   },
   humidity: {
     label: "Độ ẩm",
     unit: "%",
-    badgeClass: "bg-blue-100 text-blue-600 border-blue-200",
+    badgeClass: "bg-blue-500/20 text-blue-700 border-blue-400/50 font-semibold",
   },
   light: {
     label: "Ánh sáng",
     unit: "lux",
-    badgeClass: "bg-amber-100 text-amber-600 border-amber-200",
+    badgeClass: "bg-amber-500/20 text-amber-700 border-amber-400/50 font-semibold",
   },
 };
 
