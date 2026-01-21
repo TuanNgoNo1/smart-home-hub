@@ -28,7 +28,7 @@ const sensorConfig: Record<
   temperature: {
     label: "Nhiệt độ",
     unit: "°C",
-    badgeClass: "bg-orange-500/20 text-orange-700 border-orange-400/50 font-semibold",
+    badgeClass: "bg-red-500/20 text-red-700 border-red-400/50 font-semibold",
   },
   humidity: {
     label: "Độ ẩm",
@@ -38,7 +38,7 @@ const sensorConfig: Record<
   light: {
     label: "Ánh sáng",
     unit: "lux",
-    badgeClass: "bg-amber-500/20 text-amber-700 border-amber-400/50 font-semibold",
+    badgeClass: "bg-yellow-500/20 text-yellow-700 border-yellow-400/50 font-semibold",
   },
 };
 

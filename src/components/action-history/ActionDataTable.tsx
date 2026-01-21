@@ -21,7 +21,7 @@ interface ActionDataTableProps {
 const deviceConfig: Record<DeviceType, { label: string; icon: React.ReactNode }> = {
   light: { 
     label: "Đèn", 
-    icon: <Lightbulb className="w-5 h-5 text-amber-500" /> 
+    icon: <Lightbulb className="w-5 h-5 text-yellow-500" /> 
   },
   fan: { 
     label: "Quạt", 

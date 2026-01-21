@@ -98,7 +98,7 @@ const sensorTypeOptions: {
   { value: "all", label: "Cảm biến", icon: null },
   { value: "temperature", label: "Nhiệt độ", icon: <Thermometer className="w-4 h-4 text-red-500" /> },
   { value: "humidity", label: "Độ ẩm", icon: <Droplets className="w-4 h-4 text-blue-500" /> },
-  { value: "light", label: "Ánh sáng", icon: <Sun className="w-4 h-4 text-amber-500" /> },
+  { value: "light", label: "Ánh sáng", icon: <Sun className="w-4 h-4 text-yellow-500" /> },
 ];
 
 const sortOptions = [

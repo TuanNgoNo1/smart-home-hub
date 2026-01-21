@@ -20,8 +20,8 @@ const deviceConfig: Record<DeviceType, {
   light: {
     label: "Light",
     labelVi: "Đèn",
-    iconBgOn: "bg-amber-100",
-    iconColorOn: "text-amber-500",
+    iconBgOn: "bg-yellow-100",
+    iconColorOn: "text-yellow-500",
   },
   fan: {
     label: "Fan",
@@ -58,7 +58,7 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
             className={cn(
               baseClasses,
               isOn 
-                ? "text-amber-500" 
+                ? "text-yellow-500" 
                 : "text-gray-400"
             )} 
           />
@@ -100,7 +100,7 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
   return (
     <div className={cn(
       "device-card flex flex-col items-center text-center transition-all duration-500",
-      isOn && type === "light" && "ring-2 ring-amber-400/50 border-amber-400/60 shadow-[0_0_30px_hsl(45,95%,55%,0.4)]",
+      isOn && type === "light" && "ring-2 ring-yellow-400/50 border-yellow-400/60 shadow-[0_0_30px_hsl(48,100%,50%,0.4)]",
       isOn && type === "fan" && "ring-2 ring-blue-400/50 border-blue-400/60 shadow-[0_0_30px_hsl(210,95%,55%,0.4)]",
       isOn && type === "ac" && "ring-2 ring-cyan-400/50 border-cyan-400/60 shadow-[0_0_30px_hsl(185,95%,55%,0.4)]",
       isFailed && "ring-2 ring-device-failed/30"
@@ -117,7 +117,7 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
       {/* Icon Container */}
       <div className={cn(
         "relative w-24 h-24 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300",
-        isOn && type === "light" && "bg-amber-50",
+        isOn && type === "light" && "bg-yellow-50",
         isOn && type === "fan" && "bg-blue-50",
         isOn && type === "ac" && "bg-cyan-50",
         !isOn && !isFailed && "bg-gray-100",
