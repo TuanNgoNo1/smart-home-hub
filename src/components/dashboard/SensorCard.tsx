@@ -19,6 +19,7 @@ const sensorConfig: Record<SensorType, {
   iconBgClass: string;
   iconColorClass: string;
   valueColorClass: string;
+  warningBadgeClass: string;
   warningThreshold?: { high?: number; low?: number };
 }> = {
   temperature: {
@@ -28,6 +29,7 @@ const sensorConfig: Record<SensorType, {
     iconBgClass: "bg-red-100",
     iconColorClass: "text-red-500",
     valueColorClass: "text-sensor-temperature",
+    warningBadgeClass: "bg-red-50 text-red-600 border-red-200",
     warningThreshold: { high: 30 },
   },
   humidity: {
@@ -37,6 +39,7 @@ const sensorConfig: Record<SensorType, {
     iconBgClass: "bg-blue-100",
     iconColorClass: "text-blue-500",
     valueColorClass: "text-sensor-humidity",
+    warningBadgeClass: "bg-blue-50 text-blue-600 border-blue-200",
     warningThreshold: { high: 80, low: 30 },
   },
   light: {
@@ -46,6 +49,7 @@ const sensorConfig: Record<SensorType, {
     iconBgClass: "bg-yellow-100",
     iconColorClass: "text-yellow-500",
     valueColorClass: "text-sensor-light",
+    warningBadgeClass: "bg-yellow-50 text-yellow-600 border-yellow-300",
     warningThreshold: { high: 1500 },
   },
 };
@@ -85,7 +89,10 @@ export const SensorCard = ({ type, value, unit, lastUpdated, warning }: SensorCa
       {warningText && (
         <Badge 
           variant="outline" 
-          className="absolute top-3 left-3 bg-red-50 text-red-600 border-red-200 text-[10px] px-1.5 py-0.5 font-medium gap-1"
+          className={cn(
+            "absolute top-3 left-3 text-[10px] px-1.5 py-0.5 font-medium gap-1",
+            config.warningBadgeClass
+          )}
         >
           <AlertTriangle className="w-3 h-3" />
           {warningText}
