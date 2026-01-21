@@ -235,6 +235,33 @@
     }
   }
 
+  @keyframes glow-pulse-amber {
+    0%, 100% {
+      box-shadow: 0 0 25px hsl(45, 95%, 55%, 0.35);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(45, 95%, 55%, 0.55);
+    }
+  }
+
+  @keyframes glow-pulse-blue {
+    0%, 100% {
+      box-shadow: 0 0 25px hsl(210, 95%, 55%, 0.35);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(210, 95%, 55%, 0.55);
+    }
+  }
+
+  @keyframes glow-pulse-cyan {
+    0%, 100% {
+      box-shadow: 0 0 25px hsl(185, 95%, 55%, 0.35);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(185, 95%, 55%, 0.55);
+    }
+  }
+
   @keyframes shimmer {
     0% {
       background-position: -200% 0;

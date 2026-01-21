@@ -100,9 +100,9 @@ export const DeviceCard = ({ type, state, onToggle }: DeviceCardProps) => {
   return (
     <div className={cn(
       "device-card flex flex-col items-center text-center transition-all duration-500",
-      isOn && type === "light" && "ring-2 ring-amber-400/50 border-amber-400/60 shadow-[0_0_30px_hsl(45,95%,55%,0.4)]",
-      isOn && type === "fan" && "ring-2 ring-blue-400/50 border-blue-400/60 shadow-[0_0_30px_hsl(210,95%,55%,0.4)]",
-      isOn && type === "ac" && "ring-2 ring-cyan-400/50 border-cyan-400/60 shadow-[0_0_30px_hsl(185,95%,55%,0.4)]",
+      isOn && type === "light" && "ring-2 ring-amber-400/50 border-amber-400/60 animate-[glow-pulse-amber_2.5s_ease-in-out_infinite]",
+      isOn && type === "fan" && "ring-2 ring-blue-400/50 border-blue-400/60 animate-[glow-pulse-blue_2.5s_ease-in-out_infinite]",
+      isOn && type === "ac" && "ring-2 ring-cyan-400/50 border-cyan-400/60 animate-[glow-pulse-cyan_2.5s_ease-in-out_infinite]",
       isFailed && "ring-2 ring-device-failed/30"
     )}>
       {/* Status indicator */}
