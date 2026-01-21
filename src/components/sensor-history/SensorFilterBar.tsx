@@ -1,4 +1,4 @@
-import { Search, Filter, ArrowUpDown, Clock, Calendar, RotateCcw } from "lucide-react";
+import { Search, Filter, ArrowUpDown, Clock, Calendar, RotateCcw, Thermometer, Droplets, Sun } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -93,11 +93,12 @@ interface SensorFilterBarProps {
 const sensorTypeOptions: {
   value: SensorType | "all";
   label: string;
+  icon: React.ReactNode;
 }[] = [
-  { value: "all", label: "Cảm biến" },
-  { value: "temperature", label: "Nhiệt độ" },
-  { value: "humidity", label: "Độ ẩm" },
-  { value: "light", label: "Ánh sáng" },
+  { value: "all", label: "Cảm biến", icon: null },
+  { value: "temperature", label: "Nhiệt độ", icon: <Thermometer className="w-4 h-4 text-red-500" /> },
+  { value: "humidity", label: "Độ ẩm", icon: <Droplets className="w-4 h-4 text-blue-500" /> },
+  { value: "light", label: "Ánh sáng", icon: <Sun className="w-4 h-4 text-amber-500" /> },
 ];
 
 const sortOptions = [
@@ -228,7 +229,10 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
             <SelectContent className="bg-popover border border-border shadow-lg z-50">
               {sensorTypeOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
-                  {option.label}
+                  <span className="flex items-center gap-2">
+                    {option.icon && option.icon}
+                    <span>{option.label}</span>
+                  </span>
                 </SelectItem>
               ))}
             </SelectContent>
