@@ -188,7 +188,7 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
             value={filters.deviceType}
             onValueChange={(value) => onFilterChange({ deviceType: value as DeviceType | "all" })}
           >
-            <SelectTrigger className="w-[130px] bg-background">
+            <SelectTrigger className="w-auto min-w-[130px] bg-background">
               <SelectValue placeholder="Thiết bị" />
             </SelectTrigger>
             <SelectContent className="bg-popover border border-border shadow-lg z-50">
@@ -209,7 +209,7 @@ export const ActionFilterBar = ({ filters, onFilterChange }: ActionFilterBarProp
           value={filters.status || "all"}
           onValueChange={(value) => onFilterChange({ status: value as ActionStatus | "all" })}
         >
-          <SelectTrigger className="w-[130px] bg-background">
+          <SelectTrigger className="w-auto min-w-[130px] bg-background">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent className="bg-popover border border-border shadow-lg z-50">
