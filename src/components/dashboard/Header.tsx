@@ -1,4 +1,5 @@
-import { Home, Wifi, WifiOff, Settings } from "lucide-react";
+import { Home, Wifi, WifiOff } from "lucide-react";
+import { SettingsDropdown } from "./SettingsDropdown";
 
 interface HeaderProps {
   isConnected: boolean;
@@ -34,9 +35,7 @@ export const Header = ({ isConnected }: HeaderProps) => {
               )}
             </div>
             
-            <button className="p-2 rounded-lg hover:bg-muted transition-colors">
-              <Settings className="w-5 h-5 text-muted-foreground" />
-            </button>
+            <SettingsDropdown />
           </div>
         </div>
       </div>
