@@ -6,10 +6,8 @@ import {
   FileText, 
   BookOpen, 
   Github, 
-  User, 
   GraduationCap, 
   IdCard,
-  Key,
   ExternalLink,
   Cpu,
   Database,
@@ -42,12 +40,6 @@ const Profile = () => {
     backend: ["Spring Boot", "Java 17"],
     frontend: ["React", "TypeScript", "Tailwind CSS"],
     database: ["MySQL"],
-  };
-
-  // Demo Credentials
-  const demoCredentials = {
-    username: "demo@example.com",
-    password: "demo123",
   };
 
   const getInitials = (name: string) => {
@@ -249,36 +241,6 @@ const Profile = () => {
             </CardContent>
           </Card>
 
-          {/* Demo Credentials */}
-          <Card>
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2 text-base font-semibold">
-                <Key className="w-5 h-5 text-primary" />
-                Demo Credentials
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-muted/50 rounded-xl p-4 space-y-3">
-                <div className="flex items-center gap-3">
-                  <User className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm text-muted-foreground w-20">Username:</span>
-                  <code className="bg-background px-3 py-1 rounded-lg text-sm font-mono border">
-                    {demoCredentials.username}
-                  </code>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Key className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm text-muted-foreground w-20">Password:</span>
-                  <code className="bg-background px-3 py-1 rounded-lg text-sm font-mono border">
-                    {demoCredentials.password}
-                  </code>
-                </div>
-                <p className="text-xs text-muted-foreground mt-3 pt-3 border-t border-border">
-                  * Sử dụng thông tin trên để đăng nhập vào hệ thống demo
-                </p>
-              </div>
-            </CardContent>
-          </Card>
 
         </div>
       </main>
