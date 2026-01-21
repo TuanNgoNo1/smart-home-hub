@@ -100,9 +100,9 @@ export default {
       boxShadow: {
         'sensor': '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
         'sensor-hover': '0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05)',
-        'glow-warm': '0 0 20px hsl(12, 90%, 62%, 0.3)',
-        'glow-cool': '0 0 20px hsl(200, 95%, 60%, 0.3)',
-        'glow-light': '0 0 20px hsl(45, 95%, 55%, 0.4)',
+        'glow-warm': '0 0 20px hsl(0, 85%, 58%, 0.3)',
+        'glow-cool': '0 0 20px hsl(210, 95%, 58%, 0.3)',
+        'glow-light': '0 0 20px hsl(48, 100%, 50%, 0.4)',
       },
       keyframes: {
         "accordion-down": {

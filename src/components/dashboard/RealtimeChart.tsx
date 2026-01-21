@@ -82,16 +82,16 @@ export const RealtimeChart = ({ data }: RealtimeChartProps) => {
           >
             <defs>
               <linearGradient id="gradientTemperature" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(12, 90%, 62%)" stopOpacity={0.4} />
-                <stop offset="100%" stopColor="hsl(12, 90%, 62%)" stopOpacity={0.05} />
+                <stop offset="0%" stopColor="hsl(0, 85%, 58%)" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="hsl(0, 85%, 58%)" stopOpacity={0.05} />
               </linearGradient>
               <linearGradient id="gradientHumidity" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(200, 95%, 60%)" stopOpacity={0.4} />
-                <stop offset="100%" stopColor="hsl(200, 95%, 60%)" stopOpacity={0.05} />
+                <stop offset="0%" stopColor="hsl(210, 95%, 58%)" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="hsl(210, 95%, 58%)" stopOpacity={0.05} />
               </linearGradient>
               <linearGradient id="gradientLight" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(45, 95%, 55%)" stopOpacity={0.4} />
-                <stop offset="100%" stopColor="hsl(45, 95%, 55%)" stopOpacity={0.05} />
+                <stop offset="0%" stopColor="hsl(48, 100%, 50%)" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="hsl(48, 100%, 50%)" stopOpacity={0.05} />
               </linearGradient>
             </defs>
             <CartesianGrid 
@@ -131,33 +131,33 @@ export const RealtimeChart = ({ data }: RealtimeChartProps) => {
               type="monotone"
               dataKey="temperature"
               name="Nhiệt độ"
-              stroke="hsl(12, 90%, 62%)"
+              stroke="hsl(0, 85%, 58%)"
               strokeWidth={2.5}
               fill="url(#gradientTemperature)"
               dot={false}
-              activeDot={{ r: 4, fill: "hsl(12, 90%, 62%)" }}
+              activeDot={{ r: 4, fill: "hsl(0, 85%, 58%)" }}
             />
             <Area
               yAxisId="left"
               type="monotone"
               dataKey="humidity"
               name="Độ ẩm"
-              stroke="hsl(200, 95%, 60%)"
+              stroke="hsl(210, 95%, 58%)"
               strokeWidth={2.5}
               fill="url(#gradientHumidity)"
               dot={false}
-              activeDot={{ r: 4, fill: "hsl(200, 95%, 60%)" }}
+              activeDot={{ r: 4, fill: "hsl(210, 95%, 58%)" }}
             />
             <Area
               yAxisId="right"
               type="monotone"
               dataKey="light"
               name="Ánh sáng"
-              stroke="hsl(45, 95%, 55%)"
+              stroke="hsl(48, 100%, 50%)"
               strokeWidth={2.5}
               fill="url(#gradientLight)"
               dot={false}
-              activeDot={{ r: 4, fill: "hsl(45, 95%, 55%)" }}
+              activeDot={{ r: 4, fill: "hsl(48, 100%, 50%)" }}
             />
           </AreaChart>
         </ResponsiveContainer>
