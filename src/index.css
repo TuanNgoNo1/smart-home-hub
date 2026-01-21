@@ -6,16 +6,12 @@
 
 @layer base {
   :root {
-    --background: 210 40% 94%;
-    --background-gradient: linear-gradient(
-      -45deg, 
-      hsl(210, 60%, 95%), 
-      hsl(200, 70%, 90%), 
-      hsl(220, 65%, 92%), 
-      hsl(190, 60%, 88%), 
-      hsl(230, 55%, 94%),
-      hsl(200, 65%, 91%)
-    );
+    --background: 220 10% 96%;
+    --background-gradient: 
+      radial-gradient(ellipse 80% 50% at 20% 30%, hsla(12, 80%, 70%, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 20%, hsla(200, 80%, 65%, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 50% at 70% 80%, hsla(45, 80%, 60%, 0.08) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(220, 15%, 97%) 0%, hsl(220, 10%, 94%) 50%, hsl(220, 12%, 96%) 100%);
     --foreground: 220 25% 10%;
 
     --card: 0 0% 100%;
@@ -126,21 +122,7 @@
     @apply text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
     background: var(--background-gradient);
-    background-size: 400% 400%;
-    animation: gradient-shift 15s ease infinite;
     min-height: 100vh;
-  }
-
-  @keyframes gradient-shift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
   }
 
   .font-mono {
