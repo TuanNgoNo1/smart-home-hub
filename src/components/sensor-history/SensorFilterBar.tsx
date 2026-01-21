@@ -223,7 +223,7 @@ export const SensorFilterBar = ({ filters, onFilterChange }: SensorFilterBarProp
             value={filters.sensorType}
             onValueChange={(value) => onFilterChange({ sensorType: value as SensorType | "all" })}
           >
-            <SelectTrigger className="w-[120px] bg-background">
+            <SelectTrigger className="w-auto min-w-[120px] bg-background">
               <SelectValue placeholder="Loại" />
             </SelectTrigger>
             <SelectContent className="bg-popover border border-border shadow-lg z-50">
