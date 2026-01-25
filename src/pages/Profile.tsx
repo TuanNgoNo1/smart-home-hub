@@ -15,6 +15,7 @@ import {
   Server,
   Radio
 } from "lucide-react";
+import avatarImage from "@/assets/avatar.png";
 
 const Profile = () => {
   // Personal Information - Update these with real data
@@ -22,7 +23,7 @@ const Profile = () => {
     name: "Ngô Đức Anh Tuấn",
     className: "D22PTDPT02",
     studentId: "B22DCPT248",
-    avatarUrl: "",
+    avatarUrl: avatarImage,
     description: "Đồ án IoT - Hệ thống giám sát và điều khiển thiết bị thông minh",
   };
 
