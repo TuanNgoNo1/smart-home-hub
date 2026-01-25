@@ -64,7 +64,7 @@ const Profile = () => {
               <div className="flex items-center gap-6">
                 {/* Avatar */}
                 <Avatar className="w-28 h-28 border-4 border-white shadow-xl">
-                  <AvatarImage src={profileData.avatarUrl} alt={profileData.name} />
+                  <AvatarImage src={profileData.avatarUrl} alt={profileData.name} className="object-cover object-top" />
                   <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600">
                     {getInitials(profileData.name)}
                   </AvatarFallback>
