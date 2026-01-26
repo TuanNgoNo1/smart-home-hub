@@ -192,43 +192,77 @@ npm run lint             # Check code quality
 
 ## 📡 API Endpoints (Backend)
 
-### Sensor Data
+### 1. Dashboard APIs
+| Method | Endpoint | Mô tả |
+| :--- | :--- | :--- |
+| `GET` | `/api/sensors/latest` | Lấy 3 chỉ số môi trường mới nhất (Temp, Hum, Light) để hiển thị Dashboard. |
+| `GET` | `/api/devices` | Lấy danh sách thiết bị kèm trạng thái hiện tại (`device_state`) để hiển thị nút Toggle. |
+| `POST` | `/api/devices/control` | Gửi lệnh điều khiển (Body: `deviceId`, `action`). Backend sẽ tự sinh `requestId`. |
 
-- `GET /api/sensors` - Danh sách cảm biến
-- `GET /api/data-sensor/latest` - Dữ liệu mới nhất
-- `GET /api/data-sensor?page=1&limit=10` - Lịch sử (phân trang)
-- `GET /api/data-sensor/chart?minutes=1` - Dữ liệu biểu đồ
+### 2. Data Sensor APIs
+| Method | Endpoint | Mô tả |
+| :--- | :--- | :--- |
+| `GET` | `/api/sensors` | Lấy danh sách các loại cảm biến (`dht_temp`, `light`...) cho Dropdown lọc. |
+| `GET` | `/api/sensor-data` | Tìm kiếm và phân trang lịch sử cảm biến.<br>**Params:** `sensor_id`, `from`, `to`, `page`, `pageSize`, `sort`. |
 
-### Device Control
-
-- `GET /api/devices` - Danh sách thiết bị
-- `POST /api/device/control` - Điều khiển thiết bị
-- `GET /api/device/status/:id` - Trạng thái hiện tại
-
-### Action History
-
-- `GET /api/action-history?page=1&limit=10` - Lịch sử hành động
+### 3. Action History APIs
+| Method | Endpoint | Mô tả |
+| :--- | :--- | :--- |
+| `GET` | `/api/action-history` | Tìm kiếm lịch sử điều khiển.<br>**Params:** `device_id`, `status` (WAITING/SUCCESS...), `search` (theo giờ), `page`, `pageSize`. |
 
 ---
 
 ## 🔌 MQTT Topics
 
-| Topic            | Direction          | Payload                              |
-| ---------------- | ------------------ | ------------------------------------ |
-| `data_sensor`    | Hardware → Backend | `{temp:28, humidity:80, light:1000}` |
-| `device_control` | Backend → Hardware | `{device_id:1, action:"ON"}`         |
-| `device_status`  | Hardware → Backend | `{device_id:1, status:"ON"}`         |
+Hệ thống sử dụng giao thức MQTT để giao tiếp giữa Hardware (ESP32) và Backend.
+
+| Topic | Direction | Description | Payload Example |
+| :--- | :--- | :--- | :--- |
+| `iot/room1/sensor/data` | HW $\to$ BE | Gửi dữ liệu cảm biến (2s/lần) | `{ "temp": 28.5, "hum": 65, "light": 1200 }` |
+| `iot/room1/device/cmd` | BE $\to$ HW | Gửi lệnh điều khiển | `{ "requestId": "req-123", "deviceId": "led_01", "action": "ON" }` |
+| `iot/room1/device/ack` | HW $\to$ BE | Phản hồi trạng thái (ACK) | `{ "requestId": "req-123", "device_state": "ON", "result": "SUCCESS" }` |
 
 ---
 
-## 🗄️ Database Schema
+## 🗄️ Database Schema (MySQL)
+
+Hệ thống gồm 4 bảng chính, hỗ trợ lưu trữ trạng thái vật lý và log lịch sử.
 
 ```sql
--- 4 bảng chính
-sensors          (id, name, unit, created_at)
-data_sensor      (id, sensor_id, value, timestamp)
-devices          (id, name, type, created_at)
-action_history   (id, device_id, action, status, timestamp)
+-- 1. Bảng Devices (Lưu trạng thái vật lý dùng cho F5 Reload)
+devices (
+  id VARCHAR(50) PK,      -- e.g., 'led_01'
+  name VARCHAR(100),
+  topic VARCHAR(255),
+  device_state VARCHAR(20), -- 'ON' / 'OFF'
+  created_at DATETIME
+)
+
+-- 2. Bảng Sensors
+sensors (
+  id VARCHAR(50) PK,      -- e.g., 'dht_temp'
+  name VARCHAR(100),
+  topic VARCHAR(255),
+  created_at DATETIME
+)
+
+-- 3. Bảng Sensor Data (Lưu lịch sử đo đạc)
+sensor_data (
+  id BIGINT PK,
+  sensor_id VARCHAR(50) FK,
+  value FLOAT,
+  created_at DATETIME
+)
+
+-- 4. Bảng Action History (Lưu lịch sử điều khiển & trạng thái lệnh)
+action_history (
+  id BIGINT PK,
+  request_id VARCHAR(50) UNIQUE, -- Map với ACK từ MQTT
+  device_id VARCHAR(50) FK,
+  action VARCHAR(10),     -- 'ON' / 'OFF'
+  status VARCHAR(20),     -- 'WAITING', 'SUCCESS', 'FAILED', 'TIMEOUT'
+  created_at DATETIME
+)
 ```
 
 Chi tiết xem file: [SRS.md](SRS.md)
