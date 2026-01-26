@@ -28,8 +28,8 @@ Hệ thống IoT cho phép giám sát và điều khiển thiết bị thông mi
 │  Frontend   │◄────►│   Backend   │◄────►│  Hardware   │
 │  (React)    │ HTTP │  (Node.js)  │ MQTT │ (ESP8266)   │
 │             │      │             │      │             │
-│  • Dashboard│      │  • REST API │      │  • DHT11    │
-│  • Charts   │      │  • MQTT Sub │      │  • LDR      │
+│  • Dashboard│      │  • REST API │      │  • DHT22    │
+│  • Charts   │      │  • MQTT Sub │      │  • BH1750   │
 │  • History  │      │  • MySQL    │      │  • 3x LED   │
 └─────────────┘      └─────────────┘      └─────────────┘
 ```
@@ -63,11 +63,21 @@ npm install
 Tạo file `.env` trong thư mục gốc:
 
 ```env
-# Database
+# --- Frontend (.env) ---
 VITE_API_URL=http://localhost:3000/api
 VITE_WS_URL=ws://localhost:3000
 
-# MQTT (cho backend)
+# --- Backend (.env) ---
+# Server
+PORT=3000
+
+# Database (MySQL)
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=smart_home_iot
+
+# MQTT Broker
 MQTT_HOST=localhost
 MQTT_PORT=1884
 MQTT_USERNAME=YourFullName
@@ -107,8 +117,6 @@ smart-home-iot/
 │   ├── types/               # TypeScript types
 │   └── lib/                 # Utilities
 ├── public/                  # Static assets
-├── REQUIREMENTS.md          # Yêu cầu môn học
-├── SRS.md                   # Software Requirements Specification
 └── README.md                # This file
 ```
 
@@ -150,6 +158,7 @@ smart-home-iot/
 - **3 Card Cảm biến:** Hiển thị giá trị real-time với gradient đẹp
 - **Biểu đồ Line Chart:** 3 đường màu theo thời gian
 - **3 Nút Điều khiển:** OFF → LOADING → ON (với hiệu ứng)
+- **Toggle Switch:** Nút gạt bật/tắt thiết bị với loading spinner khi đang xử lý
 
 ### 2. Data Sensor (Lịch sử Cảm biến)
 
@@ -264,15 +273,9 @@ action_history (
   created_at DATETIME
 )
 ```
-
-Chi tiết xem file: [SRS.md](SRS.md)
-
 ---
 
 ## 📝 Tài Liệu
-
-- **[REQUIREMENTS.md](REQUIREMENTS.md)** - Yêu cầu môn học chi tiết
-- **[SRS.md](SRS.md)** - Software Requirements Specification
 - **Figma Design:** [Link Figma](https://figma.com/...)
 - **API Documentation:** [Link Postman](https://postman.com/...)
 
